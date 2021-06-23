@@ -8,6 +8,12 @@ authors = ["Lorenzo Balugani <lorenzo.balugani@gmail.com>"]
 python = "^3.8.5"
 fastapi = "^0.65.2"
 uvicorn = {extras = ["standard"], version = "^0.14.0"}
+SQLAlchemy = "^1.4.19"
+bcrypt = "^3.2.0"
+psycopg2 = "^2.9.1"
+python-jose = {extras = ["cryptography"], version = "^3.3.0"}
+python-multipart = "^0.0.5"
+passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 
 [tool.poetry.dev-dependencies]
 
