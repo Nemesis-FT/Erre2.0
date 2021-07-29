@@ -14,6 +14,17 @@ class User(BaseModel):
         orm_mode = True
 
 
+class UserList(BaseModel):
+    users: List[User]
+
+
+class UserCreatePlain(User):
+    password: str
+
+    class Config:
+        orm_mode = True
+
+
 class UserCreate(User):
     hash: bytes
 
@@ -22,7 +33,7 @@ class UserCreate(User):
 
 
 class Course(BaseModel):
-    cid: int
+    cid: Optional[int]
     name: str
     professor: str
     curriculum: str
@@ -33,26 +44,42 @@ class Course(BaseModel):
         orm_mode = True
 
 
-class Commits(BaseModel):
-    cid: int
+class CourseList(BaseModel):
+    courses: List[Course]
+
+
+class Commit(BaseModel):
+    cid: Optional[int]
     description: str
     date: datetime
+    summary_id: int
 
     class Config:
         orm_mode = True
 
 
 class Summary(BaseModel):
-    aid: int
+    sid: Optional[int]
+    author_id: int
+    course_id: int
     name: str
     filename: str
     downloads: int
-    author: User
-    course: Course
-    commits: List[Commits]
+    author: Optional[User]
+    course: Optional[Course]
+    commits: Optional[List[Commit]]
 
     class Config:
         orm_mode = True
+
+
+class SummaryList(BaseModel):
+    summaries: List[Summary]
+
+
+class SummaryUpdate(BaseModel):
+    summary: Summary
+    description: str
 
 
 class Server(BaseModel):
@@ -60,4 +87,11 @@ class Server(BaseModel):
     university: str
     monetization_link: str
     motd: str
-    owner: User
+    owner_id: int
+    owner: Optional[User]
+
+
+class Planetarium(BaseModel):
+    server: Server
+    version: str
+    type: str

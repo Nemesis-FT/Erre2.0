@@ -1,5 +1,11 @@
-from fastapi import Header, HTTPException
+from fastapi import Header, HTTPException, UploadFile
 from erre2.database.db import SessionLocal
+import aiofiles
+import os
+
+
+async def get_erre2_version():
+    return "0.1.0"
 
 
 async def get_auth_token(authorization: str = Header(...)):
@@ -12,6 +18,9 @@ def get_db():
     return db
 
 
-
-
-
+async def save_file(file: UploadFile, summary):
+    out_file_path = os.path.join("Files", "{}_{}_".format(summary.author_id, summary.course_id)+file.filename)
+    async with aiofiles.open(out_file_path, "wb") as out_file:
+        content = await file.read()
+        await out_file.write(content)
+    return file.filename

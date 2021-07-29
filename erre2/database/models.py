@@ -1,5 +1,8 @@
 from sqlalchemy import Integer, String, LargeBinary, Column, Boolean, ForeignKey, SmallInteger, DateTime
 from sqlalchemy.orm import relationship
+from erre2.database.schemas import User as UserSchema
+from erre2.database.schemas import Course as CourseSchema
+from erre2.database.schemas import Commit as CommitSchema
 
 from erre2.database.db import Base
 
@@ -16,6 +19,9 @@ class User(Base):
 
     summaries = relationship("Summary", back_populates="author")
     server = relationship("Server", back_populates="owner")
+
+    def to_schema(self):
+        return UserSchema(uid=self.uid, name=self.name, surname=self.surname, email=self.email)
 
 
 class Summary(Base):
@@ -45,6 +51,8 @@ class Commit(Base):
 
     summary_id = Column(Integer, ForeignKey("summary.sid"))
 
+    def to_schema(self):
+        return CommitSchema(cid=self.cid, description=self.description, date=self.date, summary_id=self.summary_id)
 
 class Course(Base):
     __tablename__ = "course"
@@ -56,6 +64,10 @@ class Course(Base):
     year = Column(Integer, nullable=False)
     semester = Column(Integer, nullable=False)
     docs = relationship("Summary", back_populates="course")
+
+    def to_schema(self):
+        return CourseSchema(cid=self.cid, name=self.name, professor=self.professor, curriculum=self.curriculum,
+                            year=self.year, semester=self.semester)
 
 
 class Server(Base):

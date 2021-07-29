@@ -1,8 +1,9 @@
 from fastapi import Depends, FastAPI, HTTPException, status
+from fastapi.staticfiles import StaticFiles
 import uvicorn
 from datetime import timedelta
 
-from erre2.routers import users
+from erre2.routers import users, course, server, summary
 from erre2.database import crud, schemas, models
 from erre2.dependencies import get_db
 from erre2.database.db import engine
@@ -14,7 +15,11 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 app.include_router(users.router)
+app.include_router(course.router)
+app.include_router(server.router)
+app.include_router(summary.router)
 
+app.mount("/files", StaticFiles(directory="Files"), name="files")
 
 @app.get("/")
 async def root():

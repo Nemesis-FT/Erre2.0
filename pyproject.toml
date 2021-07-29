@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "erre2.0"
+name = "erre2_0"
 version = "0.1.0"
-description = ""
+description = "A new and improved version of Erre2."
 authors = ["Lorenzo Balugani <lorenzo.balugani@gmail.com>"]
 
 [tool.poetry.dependencies]
@@ -14,6 +14,7 @@ psycopg2 = "^2.9.1"
 python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 python-multipart = "^0.0.5"
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
+aiofiles = "^0.7.0"
 
 [tool.poetry.dev-dependencies]
 
