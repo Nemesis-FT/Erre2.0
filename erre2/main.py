@@ -1,6 +1,7 @@
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.staticfiles import StaticFiles
 import uvicorn
+from fastapi.middleware.cors import CORSMiddleware
 from datetime import timedelta
 
 from erre2.routers import users, course, server, summary
@@ -18,6 +19,22 @@ app.include_router(users.router)
 app.include_router(course.router)
 app.include_router(server.router)
 app.include_router(summary.router)
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:8080",
+    "http://localhost:3000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.mount("/files", StaticFiles(directory="Files"), name="files")
 

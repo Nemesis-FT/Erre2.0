@@ -1,24 +1,36 @@
 import logo from './logo.svg';
+import Routes from "./Routes";
 import './App.css';
+import {AppContext} from "./libs/Context"
+import React, {useEffect, useState} from "react";
+import {Link, useHistory} from "react-router-dom";
+import {Bluelib} from "@steffo/bluelib-react";
 
 function App() {
+  const [instanceIp, setInstanceIp] = useState("");
+  const [connected, setConnected] = useState(false);
+  let history = useHistory();
+
+  useEffect(() => {
+    onLoad();
+  }, [history]);
+
+  function onLoad(){
+    if(localStorage.getItem("instanceIp" && history)){
+        setInstanceIp(localStorage.getItem("instanceIp"))
+        setConnected(true)
+        history.push("/erre2/"+instanceIp)
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Bluelib theme={"sophon"}>
+        <div className="App">
+          <AppContext.Provider value={{instanceIp, setInstanceIp, connected, setConnected}}>
+              <Routes/>
+          </AppContext.Provider>
+        </div>
+      </Bluelib>
   );
 }
 
