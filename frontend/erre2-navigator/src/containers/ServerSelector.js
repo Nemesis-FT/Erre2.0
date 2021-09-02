@@ -1,7 +1,11 @@
 import React, {useEffect, useState} from "react";
-import {Box, Button, Chapter, Dialog, Field, Form} from "@steffo/bluelib-react";
+import {Anchor, Box, Button, Chapter, Dialog, Field, Form} from "@steffo/bluelib-react";
 import {useAppContext} from "../libs/Context";
 import {Link, useHistory} from "react-router-dom";
+import Style from "./ServerSelector.module.css"
+import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import ServerFav from "./ServerFav";
 
 export default function ServerSelector() {
     const [address, setAddress] = useState("");
@@ -10,20 +14,28 @@ export default function ServerSelector() {
     const [server, setServer] = useState(null);
     const {instanceIp, setInstanceIp} = useAppContext();
     const {connected, setConnected} = useAppContext();
+    const [favList, setFavList] = useState([])
+    const [hidden, setHidden] = useState(true)
     let history = useHistory();
-
-
 
 
     useEffect(() => {
         conn_check()
     }, [address])
 
+    useEffect(() => {
+        if (localStorage.getItem("favs")) {
+            let favs = JSON.parse(localStorage.getItem("favs"))
+            setFavList(favs)
+        }
+
+    }, [connected])
+
 
     async function conn_check() {
         setIsChecking(true);
         try {
-            const response = await fetch("http://"+address + "/server/planetarium", {
+            const response = await fetch("http://" + address + "/server/planetarium", {
                 method: "GET",
                 credentials: "include",
                 headers: {
@@ -53,20 +65,20 @@ export default function ServerSelector() {
 
     }
 
-    async function connect(){
-        if(!isValid){
+    async function connect() {
+        if (!isValid) {
             return
         }
         setInstanceIp(address)
         localStorage.setItem("instanceIp", address)
         setConnected(true)
-        console.debug("Collegamento a "+address)
-        history.push("/erre2/"+address)
+        console.debug("Collegamento a " + address)
+        history.push("/erre2/" + address)
     }
 
     return (
         <div>
-        <Box>
+            <Box>
 
                 <Form>
                     <Form.Row>
@@ -75,34 +87,50 @@ export default function ServerSelector() {
                         </Form.Field>
                     </Form.Row>
                 </Form>
-            {isChecking ? (
-                <div>Verifica in corso...</div>
-            ) : (
-                <div></div>
-            )}
-            {isValid ? (
-                <div>
-                    <Dialog customColor={"#6fd052"}>
-                        {server.name} ({server.university})
-                        <p> {server.type} v. {server.version} </p>
-                    </Dialog>
-                </div>
-            ) : (
-                <div>
+                {isChecking ? (
+                    <div>Verifica in corso...</div>
+                ) : (
+                    <div></div>
+                )}
+                {isValid ? (
+                    <div>
+                        <Dialog customColor={"#6fd052"}>
+                            {server.name} ({server.university})
+                            <p> {server.type} v. {server.version} </p>
+                        </Dialog>
+                    </div>
+                ) : (
+                    <div>
 
-                </div>
-            )}
+                    </div>
+                )}
 
-        </Box>
-        <Box>
-            <p>            Il navigatore ti consente di esplorare la costellazione di istanze di Erre2, appartenenti a diversi
-                gruppi di studenti. Per consultare i riassunti di un certo gruppo, devi inserire l'indirizzo dell'istanza
-                corrispondente. E' possibile far registrare la propria istanza all'interno della costellazione ufficiale di
-                Erre2, e questa sarà raggiungibile dal servizio "Planetario".</p>
-        </Box>
+            </Box>
             <Button children={"Connettiti"} disabled={!isValid} onClick={e => connect()}>
 
             </Button>
+            <Box>
+                <Anchor onClick={(e) => {
+                    setHidden(!hidden)
+                }}><FontAwesomeIcon icon={faQuestionCircle}/></Anchor>
+                {hidden ? (<div></div>) : (
+                    <p> Il navigatore ti consente di esplorare la costellazione di istanze di Erre2, appartenenti a
+                        diversi
+                        gruppi di studenti. Per consultare i riassunti di un certo gruppo, devi inserire l'indirizzo
+                        dell'istanza
+                        corrispondente. E' possibile far registrare la propria istanza all'interno della costellazione
+                        ufficiale di
+                        Erre2, e questa sarà raggiungibile dal servizio "Planetario".</p>)}
+
+            </Box>
+            <Box className={Style.Scrollable}>
+                {favList ? (
+                    <div>{favList.map(fav => <ServerFav fav={fav}/>)}</div>
+                ) : (
+                    <p>Nessun server tra i preferiti. Per aggiungerne, clicca sulla stella di fianco al nome di un
+                        server.</p>
+                )}
+            </Box>
         </div>
     );
 }

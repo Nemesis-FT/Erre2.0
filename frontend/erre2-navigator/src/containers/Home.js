@@ -1,6 +1,6 @@
 import React from "react";
 import Style from "./Home.module.css";
-import {Box, Chapter, Heading, LayoutFill, Panel} from "@steffo/bluelib-react";
+import {Box, Chapter, Footer, Heading, LayoutFill, Panel} from "@steffo/bluelib-react";
 import ServerSelector from "./ServerSelector";
 
 export default function Home() {
@@ -14,6 +14,8 @@ export default function Home() {
 
 
             <ServerSelector/>
+
         </div>
+
     );
 }

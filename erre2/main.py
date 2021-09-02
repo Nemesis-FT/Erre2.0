@@ -7,7 +7,7 @@ from datetime import timedelta
 from erre2.routers import users, course, server, summary
 from erre2.database import crud, schemas, models
 from erre2.dependencies import get_db
-from erre2.database.db import engine
+from erre2.database.db import engine, SessionLocal
 from erre2.authentication import Token, OAuth2PasswordRequestForm, authenticate_user, ACCESS_TOKEN_EXPIRE_MINUTES, \
     create_token, get_hash
 
@@ -55,8 +55,8 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
 
 
 if __name__ == "__main__":
-    db = get_db()
-    if not db.query(models.User).filter_by(name="admin").first():
-        crud.create_user(db, schemas.UserCreate(email="admin@admin.com", hash=get_hash("password"), name="admin",
-                                                surname="admin"))
+    with SessionLocal() as db:
+        if not db.query(models.User).filter_by(uid=1).first():
+            crud.create_user(db, schemas.UserCreate(email="admin@admin.com", hash=get_hash("password"), name="admin",
+                                                    surname="admin"))
     uvicorn.run(app, host="0.0.0.0", port=8000)

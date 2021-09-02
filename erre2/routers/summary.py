@@ -28,7 +28,7 @@ async def read_summary_list(request: Request, course_id: Optional[int] = None, d
 
 @router.patch("/{summary_id}", tags=["summaries"], response_model=schemas.Summary)
 async def patch_summary(summary_id: int, update: str = Form(...), file: UploadFile = File(...),
-                       db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+                        db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
     """
     Allows course patching
     {"summary":{"sid":0,"author_id":2,"course_id":1,"name":"Pippo",
@@ -45,7 +45,7 @@ async def patch_summary(summary_id: int, update: str = Form(...), file: UploadFi
 
 @router.post("/", tags=["summaries"], response_model=schemas.Summary)
 async def create_summary_(summary: str = Form(...), file: UploadFile = File(...),
-                         current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
+                          current_user: models.User = Depends(get_current_user), db: Session = Depends(get_db)):
     """
     Allows the creation of a new summary
     {"sid": 0,"author_id": 2,"course_id": 1,"name": "Pippo","filename": "string","downloads": 0}

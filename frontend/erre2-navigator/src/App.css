@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  margin-bottom: 2rem;
+}
+
+.Fermitech-Footer{
+  margin-right: 2rem;
+  margin-left: 2rem;
 }
 
 .App-logo {

@@ -47,6 +47,9 @@ class Course(BaseModel):
 class CourseList(BaseModel):
     courses: List[Course]
 
+    class Config:
+        orm_mode = True
+
 
 class Commit(BaseModel):
     cid: Optional[int]
@@ -76,10 +79,16 @@ class Summary(BaseModel):
 class SummaryList(BaseModel):
     summaries: List[Summary]
 
+    class Config:
+        orm_mode = True
+
 
 class SummaryUpdate(BaseModel):
     summary: Summary
     description: str
+
+    class Config:
+        orm_mode = True
 
 
 class Server(BaseModel):
@@ -90,8 +99,14 @@ class Server(BaseModel):
     owner_id: int
     owner: Optional[User]
 
+    class Config:
+        orm_mode = True
+
 
 class Planetarium(BaseModel):
     server: Server
     version: str
     type: str
+
+    class Config:
+        orm_mode = True

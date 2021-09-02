@@ -10,6 +10,7 @@ from erre2.dependencies import get_db
 from erre2.database.crud import get_user_by_email
 from datetime import datetime, timedelta
 from passlib.context import CryptContext
+from erre2.database.db import SessionLocal
 
 SECRET_KEY = "supersecret"
 ALGORITHM = "HS256"
@@ -67,10 +68,11 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         token_data = TokenData(email=email)
     except JWTError:
         raise credentials_exception
-    user = get_user_by_email(get_db(), token_data.email)
-    if user is None:
-        raise credentials_exception
-    return user
+    with SessionLocal() as db:
+        user = get_user_by_email(db, token_data.email)
+        if user is None:
+            raise credentials_exception
+        return user
 
 
 

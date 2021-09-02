@@ -1,4 +1,5 @@
 from fastapi import Header, HTTPException, UploadFile
+from contextlib import contextmanager
 from erre2.database.db import SessionLocal
 import aiofiles
 import os
@@ -14,8 +15,13 @@ async def get_auth_token(authorization: str = Header(...)):
 
 
 def get_db():
-    db = SessionLocal()
-    return db
+    with SessionLocal() as ses:
+        yield ses
+
+@contextmanager
+def SessionManager():
+    session = SessionLocal()
+    yield session
 
 
 async def save_file(file: UploadFile, summary):
