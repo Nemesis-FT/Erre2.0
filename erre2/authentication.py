@@ -6,7 +6,7 @@ from fastapi import Depends, HTTPException, status
 import bcrypt
 from erre2.database import models
 from sqlalchemy.orm import Session
-from erre2.dependencies import get_db
+from erre2.dependencies import get_db, SessionLocal
 from erre2.database.crud import get_user_by_email
 from datetime import datetime, timedelta
 from passlib.context import CryptContext
@@ -39,13 +39,13 @@ def get_hash(password):
 
 
 def authenticate_user(email: str, password: str):
-    db = get_db()
-    user: models.User = get_user_by_email(db, email)
-    if not user:
-        return False
-    if not check_password(user.password, password):
-        return False
-    return user
+    with SessionLocal() as db:
+        user: models.User = get_user_by_email(db, email)
+        if not user:
+            return False
+        if not check_password(user.password, password):
+            return False
+        return user
 
 
 def create_token(data: dict):

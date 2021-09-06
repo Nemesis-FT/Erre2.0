@@ -117,7 +117,7 @@ export default function Home() {
                     </div>
                     <Chapter>
                         <div>
-                            <Button children={"Accedi"}></Button>
+                            <Button children={"Accedi"} onClick={e => history.push("/login")}></Button>
                         </div>
                         <div>
                             <Button children={"Disconnettiti"} onClick={e => disconnect()}></Button>

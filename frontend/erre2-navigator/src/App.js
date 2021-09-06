@@ -9,6 +9,7 @@ import {Bluelib, Footer} from "@steffo/bluelib-react";
 function App() {
     const [instanceIp, setInstanceIp] = useState("");
     const [connected, setConnected] = useState(false);
+    const [token, setToken] = useState("")
     let history = useHistory();
 
     useEffect(() => {
@@ -26,7 +27,7 @@ function App() {
     return (
         <Bluelib theme={"sophon"}>
             <div className="App">
-                <AppContext.Provider value={{instanceIp, setInstanceIp, connected, setConnected}}>
+                <AppContext.Provider value={{instanceIp, setInstanceIp, connected, setConnected, token, setToken}}>
                     <Routes/>
 
 
