@@ -141,5 +141,6 @@ def update_server(db: Session, update: schemas.Server):
     if absent:
         db.add(server)
         db.commit()
+    db.commit()
     db.refresh(server)
     return server

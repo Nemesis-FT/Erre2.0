@@ -3,6 +3,8 @@ import Style from "./AdminHome.module.css";
 import {Anchor, Box, Button, Chapter, Field, Footer, Form, Heading, LayoutFill, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../libs/Context";
 import {Link, useHistory} from "react-router-dom";
+import CorsiPanel from "./CorsiPanel";
+import ServerPanel from "./ServerPanel";
 
 
 export default function Login() {
@@ -93,7 +95,10 @@ export default function Login() {
                 setIsOwner(true)
             }
         }
-        response = await fetch("http://" + instanceIp + "/users/", {
+    }
+
+    async function loadUsers(){
+        let response = await fetch("http://" + instanceIp + "/users/", {
             method: "GET",
             credentials: "include",
             headers: {
@@ -109,8 +114,6 @@ export default function Login() {
     }
 
     async function onLoad() {
-        await loadCourse()
-        await loadSummaries()
         await loadUserData()
     }
 
@@ -120,9 +123,10 @@ export default function Login() {
             <Box>
                 {user ? (<div>Accesso eseguito come {user.email}</div>) : (<div>Accesso eseguito come...</div>)}
             </Box>
+            <div className={Style.Home}>
             {mode == "" && (
                 <div>
-                    <div className={Style.Home}>
+
                         <p>Questo è il pannello amministrativo di questa istanza di Erre2.</p>
                         <Box>
                             <Chapter>
@@ -135,14 +139,15 @@ export default function Login() {
                         {isOwner ? (<Box><Chapter><Button onClick={e => setMode("utenti")}>Gestione Utenti</Button>
                             <Button onClick={e => setMode("server")}>Gestione Server</Button></Chapter></Box>) : (
                             <div></div>)}
-                    </div>
+
                 </div>
             )}
+
             {mode != "" && (
                 <Button onClick={e => setMode("")}>Torna indietro</Button>
             )}
             {mode == "corsi" && (
-                <div></div>
+                <CorsiPanel/>
             )}
             {mode == "riassunti" && (
                 <div></div>
@@ -154,9 +159,9 @@ export default function Login() {
                 <div></div>
             )}
             {mode == "server" && (
-                <div></div>
+                <ServerPanel isOwner={isOwner}/>
             )}
-
+            </div>
 
         </div>
     );
