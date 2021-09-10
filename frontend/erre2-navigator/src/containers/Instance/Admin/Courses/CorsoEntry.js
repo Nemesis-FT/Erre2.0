@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import Style from "./AdminHome.module.css";
+import Style from "../AdminHome.module.css";
 import {Anchor, Box, Button, Chapter, Field, Footer, Form, Heading, LayoutFill, Panel} from "@steffo/bluelib-react";
-import {useAppContext} from "../../../libs/Context";
+import {useAppContext} from "../../../../libs/Context";
 import {Link, useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEdit, faTrash, faSave} from "@fortawesome/free-solid-svg-icons";

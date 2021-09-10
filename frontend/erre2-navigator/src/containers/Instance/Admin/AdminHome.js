@@ -3,8 +3,11 @@ import Style from "./AdminHome.module.css";
 import {Anchor, Box, Button, Chapter, Field, Footer, Form, Heading, LayoutFill, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../libs/Context";
 import {Link, useHistory} from "react-router-dom";
-import CorsiPanel from "./CorsiPanel";
-import ServerPanel from "./ServerPanel";
+import CorsiPanel from "./Courses/CorsiPanel";
+import ServerPanel from "./Users/ServerPanel";
+import ProfilePanel from "./Users/ProfilePanel";
+import UtentiPanel from "./Users/UtentiPanel";
+import SummaryPanel from "./Summaries/SummaryPanel";
 
 
 export default function Login() {
@@ -23,7 +26,7 @@ export default function Login() {
     useEffect(() => {
         if (!instanceIp || !token) {
             setConnected(false)
-            history.push("/")
+            history.push("/erre2/" + instanceIp)
         }
         onLoad()
     }, [token])
@@ -49,19 +52,7 @@ export default function Login() {
     }
 
     async function loadSummaries() {
-        const response = await fetch("http://" + instanceIp + "/summary/", {
-            method: "GET",
-            credentials: "include",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': "Bearer " + token
-            },
-        });
-        if (response.status === 200) {
-            let values = await response.json()
-            setSummaries(values.summaries)
-        }
+
     }
 
     async function loadUserData() {
@@ -97,37 +88,28 @@ export default function Login() {
         }
     }
 
-    async function loadUsers(){
-        let response = await fetch("http://" + instanceIp + "/users/", {
-            method: "GET",
-            credentials: "include",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': "Bearer " + token
-            },
-        });
-        if (response.status === 200) {
-            let values = await response.json()
-            setUserList(values.users)
-        }
+    async function loadUsers() {
+
     }
 
     async function onLoad() {
         await loadUserData()
     }
 
+    async function logout() {
+        setToken("")
+    }
 
     return (
         <div>
-            <Box>
-                {user ? (<div>Accesso eseguito come {user.email}</div>) : (<div>Accesso eseguito come...</div>)}
-            </Box>
+
             <div className={Style.Home}>
-            {mode == "" && (
-                <div>
+                {mode == "" && (
+                    <div>
 
                         <p>Questo è il pannello amministrativo di questa istanza di Erre2.</p>
+                        {user ? (<Button customColor={"red"} onClick={e => logout()}>Logout</Button>) : (
+                            <Button>...</Button>)}
                         <Box>
                             <Chapter>
                                 <Button onClick={e => setMode("corsi")}>Gestione Corsi</Button>
@@ -140,27 +122,32 @@ export default function Login() {
                             <Button onClick={e => setMode("server")}>Gestione Server</Button></Chapter></Box>) : (
                             <div></div>)}
 
-                </div>
-            )}
+                    </div>
+                )}
 
-            {mode != "" && (
-                <Button onClick={e => setMode("")}>Torna indietro</Button>
-            )}
-            {mode == "corsi" && (
-                <CorsiPanel/>
-            )}
-            {mode == "riassunti" && (
-                <div></div>
-            )}
-            {mode == "profilo" && (
-                <div></div>
-            )}
-            {mode == "utenti" && (
-                <div></div>
-            )}
-            {mode == "server" && (
-                <ServerPanel isOwner={isOwner}/>
-            )}
+                {mode != "" && (
+                    <div className={Style.TopButton}>
+                        <Button onClick={e => setMode("")}>Torna indietro</Button>
+                    </div>
+                )}
+                {mode == "corsi" && (
+                    <CorsiPanel/>
+                )}
+                {mode == "riassunti" && (
+                    <SummaryPanel uid={user.uid}/>
+                )}
+                {mode == "profilo" && (
+                    <div>
+                        <Heading level={2}>Gestione profilo</Heading>
+                        <ProfilePanel user={user} reload={reload} setReload={setReload}/>
+                    </div>
+                )}
+                {mode == "utenti" && (
+                    <UtentiPanel/>
+                )}
+                {mode == "server" && (
+                    <ServerPanel isOwner={isOwner}/>
+                )}
             </div>
 
         </div>

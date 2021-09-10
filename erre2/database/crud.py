@@ -1,5 +1,6 @@
 from sqlalchemy.orm import Session
 from datetime import datetime
+from fastapi import UploadFile
 import bcrypt
 
 from erre2.database import schemas, models
@@ -31,7 +32,8 @@ def update_user(db: Session, user: schemas.UserCreate, uid: int):
         return
     db_user.name = user.name
     db_user.surname = user.surname
-    db_user.password = user.hash
+    if user.hash:
+        db_user.password = user.hash
     db_user.email = user.email
     db.commit()
     db.refresh(db_user)
@@ -99,24 +101,27 @@ def get_summaries_course(db: Session, course_id: int):
     return db.query(models.Summary).filter(models.Summary.course_id == course_id).all()
 
 
-def create_summary(db: Session, summary: schemas.Summary, path):
+def create_summary(db: Session, summary: schemas.Summary, file:UploadFile):
     if not get_course(db, summary.course_id):
         return
     db_summary = models.Summary(name=summary.name,
-                                filename="{}_{}_{}".format(summary.author_id, summary.course_id, path), downloads=0,
+                                filename="tmp", downloads=0,
                                 author_id=summary.author_id,
                                 course_id=summary.course_id)
     db.add(db_summary)
     db.commit()
     db.refresh(db_summary)
+    db_summary.filename = "{}_{}".format(db_summary.sid, file.filename)
+    db.commit()
+    db.refresh(db_summary)
     return db_summary
 
 
-def update_summary(db: Session, summary: schemas.Summary, sid: int, description: str, path):
+def update_summary(db: Session, summary: schemas.Summary, sid: int, description: str, file:UploadFile):
     db_summary = get_summary(db, sid)
     if not db_summary:
         return
-    db_summary.filename = "{}_{}_{}".format(summary.author_id, summary.course_id, path)
+    db_summary.filename = "{}_{}".format(summary.sid, file.filename)
     db.commit()
     create_commit(db, schemas.Commit(description=description, date=datetime.now(), summary_id=sid))
     db.refresh(db_summary)

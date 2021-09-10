@@ -52,8 +52,8 @@ async def create_summary_(summary: str = Form(...), file: UploadFile = File(...)
     """
     pass
     summary = schemas.Summary.parse_raw(summary)
-    filename = await save_file(file, summary)
-    s: schemas.Summary = create_summary(db, summary, filename)
+    s: schemas.Summary = create_summary(db, summary, file)
+    await save_file(file, s)
     return s
 
 

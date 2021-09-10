@@ -25,7 +25,7 @@ def SessionManager():
 
 
 async def save_file(file: UploadFile, summary):
-    out_file_path = os.path.join("Files", "{}_{}_".format(summary.author_id, summary.course_id)+file.filename)
+    out_file_path = os.path.join("Files", "{}_".format(summary.sid)+file.filename)
     async with aiofiles.open(out_file_path, "wb") as out_file:
         content = await file.read()
         await out_file.write(content)
