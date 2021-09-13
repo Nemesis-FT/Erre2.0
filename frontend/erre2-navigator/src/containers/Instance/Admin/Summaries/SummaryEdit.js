@@ -40,6 +40,7 @@ export default function SummaryEdit(props) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': "Bearer " + token,
+                'Access-Control-Allow-Origin': process.env.DOMAIN
             },
         });
         props.setReload(!props.reload)

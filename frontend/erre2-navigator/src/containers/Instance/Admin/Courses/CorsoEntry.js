@@ -25,7 +25,8 @@ export default function CorsoEntry(props) {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': "Bearer " + token
+                'Authorization': "Bearer " + token,
+                'Access-Control-Allow-Origin': process.env.DOMAIN
             },
             body: JSON.stringify({
                 cid: 0,

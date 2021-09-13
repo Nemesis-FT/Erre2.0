@@ -64,8 +64,7 @@ export default function ServerPanel(props) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': "Bearer " + token,
-
-
+                'Access-Control-Allow-Origin': process.env.DOMAIN
             },
             body: JSON.stringify({
                 name: name,

@@ -40,6 +40,7 @@ export default function Login() {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+                'Access-Control-Allow-Origin': process.env.DOMAIN
             },
             body: formB
         });

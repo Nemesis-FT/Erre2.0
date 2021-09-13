@@ -31,7 +31,8 @@ export default function SummaryCreate(props) {
             credentials: "include",
             headers: {
                 'Accept': 'application/json',
-                'Authorization': "Bearer " + token
+                'Authorization': "Bearer " + token,
+                'Access-Control-Allow-Origin': process.env.DOMAIN
             },
             body: formData
         });

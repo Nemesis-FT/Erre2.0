@@ -53,7 +53,8 @@ export default function CorsiPanel() {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': "Bearer " + token
+                'Authorization': "Bearer " + token,
+                'Access-Control-Allow-Origin': process.env.DOMAIN
             },
         });
         if (response.status === 200) {
@@ -74,8 +75,7 @@ export default function CorsiPanel() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': "Bearer " + token,
-
-
+                'Access-Control-Allow-Origin': process.env.DOMAIN
             },
             body: JSON.stringify({
                 cid: 0,

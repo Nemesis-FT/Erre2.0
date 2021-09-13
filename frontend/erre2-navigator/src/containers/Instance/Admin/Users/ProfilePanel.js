@@ -24,6 +24,7 @@ export default function ProfilePanel(props) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': "Bearer " + token,
+                'Access-Control-Allow-Origin': process.env.DOMAIN
             },
             body: JSON.stringify({
                 name: name,
@@ -45,6 +46,7 @@ export default function ProfilePanel(props) {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': "Bearer " + token,
+                'Access-Control-Allow-Origin': process.env.DOMAIN
             }
         });
         props.setReload(!props.reload)
