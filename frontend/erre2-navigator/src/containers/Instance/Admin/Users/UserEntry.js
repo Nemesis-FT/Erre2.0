@@ -43,7 +43,7 @@ export default function UserEntry(props) {
                     <div><Button onClick={e => editFun()}><FontAwesomeIcon icon={faEdit}/></Button></div>
                 </Chapter>
                 {edit ? (
-                    <ProfilePanel user={props.user} setReload={props.setReload} reload={props.reload}/>
+                    <ProfilePanel user={props.user} setReload={props.setReload} reload={props.reload} uid={props.uid}/>
                     ):(
                     <div></div>
                     )

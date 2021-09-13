@@ -101,14 +101,12 @@ export default function Login() {
     }
 
     return (
-        <div>
-
             <div className={Style.Home}>
                 {mode == "" && (
                     <div>
 
                         <p>Questo è il pannello amministrativo di questa istanza di Erre2.</p>
-                        {user ? (<Button customColor={"red"} onClick={e => logout()}>Logout</Button>) : (
+                        {user ? (<Button bluelibClassNames={"color-red"} onClick={e => logout()}>Logout</Button>) : (
                             <Button>...</Button>)}
                         <Box>
                             <Chapter>
@@ -134,22 +132,20 @@ export default function Login() {
                     <CorsiPanel/>
                 )}
                 {mode == "riassunti" && (
-                    <SummaryPanel uid={user.uid}/>
+                    <SummaryPanel user={user} isAdmin={isOwner}/>
                 )}
                 {mode == "profilo" && (
                     <div>
                         <Heading level={2}>Gestione profilo</Heading>
-                        <ProfilePanel user={user} reload={reload} setReload={setReload}/>
+                        <ProfilePanel user={user} reload={reload} setReload={setReload} uid={user.uid}/>
                     </div>
                 )}
                 {mode == "utenti" && (
-                    <UtentiPanel/>
+                    <UtentiPanel uid={user.uid}/>
                 )}
                 {mode == "server" && (
                     <ServerPanel isOwner={isOwner}/>
                 )}
             </div>
-
-        </div>
     );
 }

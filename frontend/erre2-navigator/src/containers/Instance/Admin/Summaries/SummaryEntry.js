@@ -18,6 +18,9 @@ import {Link, useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit, faUpload} from "@fortawesome/free-solid-svg-icons";
 import ProfilePanel from "../Users/ProfilePanel";
+import SummaryComponent from "./SummaryComponent";
+import SummaryUpload from "./SummaryUpload";
+import SummaryEdit from "./SummaryEdit";
 
 
 export default function SummaryEntry(props) {
@@ -55,16 +58,17 @@ export default function SummaryEntry(props) {
                 </Chapter>
                 {mode == "edit" && (
                     <div>
-
+                        <SummaryEdit summary={props.summary} user={props.user} isAdmin={props.isAdmin} reload={props.reload} setReload={props.setReload}/>
                     </div>
                 )}
                 {mode == "update" &&(
                     <div>
-
+                        <SummaryUpload summary={props.summary} reload={props.reload} setReload={props.setReload} />
                     </div>
                 )}
                 {mode != "" && (
                     <div>
+                        <br/>
                         <Button onClick={e => close()}>Chiudi</Button>
                     </div>
                 )}

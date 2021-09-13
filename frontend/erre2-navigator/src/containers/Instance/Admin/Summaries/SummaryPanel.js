@@ -54,12 +54,12 @@ export default function SummaryPanel(props) {
         <div>
             <Heading level={2}>Gestione riassunti</Heading>
             <Box>
-                <div className={extend ? (Style.ScrollableExtended) : (Style.Scrollable)}>
+                <div className={extend ? (Style.ScrollableExtendedShorter) : (Style.Scrollable)}>
                     {summaries.map(summary => <SummaryEntry summary={summary} setReload={setReload} reload={reload}
-                                                     setExtend={setExtend}/>)}
+                                                     setExtend={setExtend} isAdmin={props.isAdmin} user={props.user}/>)}
                 </div>
             </Box>
-            <SummaryCreate uid={props.uid} reload={reload} setReload={setReload}/>
+            <SummaryCreate user={props.user} reload={reload} setReload={setReload}/>
         </div>
     );
 }

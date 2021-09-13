@@ -91,6 +91,10 @@ class SummaryUpdate(BaseModel):
         orm_mode = True
 
 
+class SummaryName(BaseModel):
+    name: str
+
+
 class Server(BaseModel):
     name: str
     university: str

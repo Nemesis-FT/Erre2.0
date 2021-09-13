@@ -133,7 +133,7 @@ export default function ServerPanel(props) {
 
                 </Form>
                 <Chapter>
-                    <Button customColor={"green"} onClick={e => saveElement()}><FontAwesomeIcon icon={faSave}/></Button>
+                    <Button bluelibClassNames={"color-green"} onClick={e => saveElement()}><FontAwesomeIcon icon={faSave}/></Button>
                 </Chapter>
             </Box>
 

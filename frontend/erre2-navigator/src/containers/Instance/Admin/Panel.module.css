@@ -16,6 +16,10 @@
     overflow-y: scroll;
     height: 50vh;
 }
+.ScrollableExtendedShorter{
+    overflow-y: scroll;
+    height: 37vh;
+}
 .Scrollable{
     overflow-y: scroll;
     height: 20vh;

@@ -1,6 +1,6 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, HTTPException
 from erre2.dependencies import get_auth_token, get_db, get_erre2_version
-from erre2.authentication import get_current_user
+from erre2.authentication import get_current_user, check_admin
 from erre2.database.crud import get_server, update_server
 from sqlalchemy.orm import Session
 from erre2.database import schemas, models
@@ -31,6 +31,8 @@ async def patch_server(request: Request, server: schemas.Server, db: Session = D
     """
     Updates the state of the server
     """
+    if not check_admin(current_user):
+        raise HTTPException(403, "You are not authorized.")
     s: models.Server = update_server(db, server)
     if s:
         return schemas.Server(name=s.name, university=s.university, monetization_link=s.monetization_link, motd=s.motd,

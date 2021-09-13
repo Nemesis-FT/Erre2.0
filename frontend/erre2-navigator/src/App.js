@@ -25,7 +25,8 @@ function App() {
     }
 
     return (
-        <Bluelib theme={"sophon"}>
+        <Bluelib theme={"sophon"} backgroundColor={"#272121"} accentColor={"#F6E9E9"} foregroundColor={"#e1500b"}
+        linkColor={"#E0C097"} brokenColor={"#E0C097"} visitedColor={"#E0C097"} downloadColor={"#E0C097"} redColor={"#E05D5D"}>
             <div className="App">
                 <AppContext.Provider value={{instanceIp, setInstanceIp, connected, setConnected, token, setToken}}>
                     <Routes/>

@@ -78,7 +78,7 @@ export default function UtentiPanel(props) {
             <Box>
                 <div className={extend ? (Style.ScrollableExtended) : (Style.Scrollable)}>
                     {userList.map(user => <UserEntry user={user} setReload={setRefresh} reload={refresh}
-                                                       setExtend={setExtend}/>)}
+                                                       setExtend={setExtend} uid={props.uid}/>)}
                 </div>
             </Box>
             <Box>
@@ -109,7 +109,7 @@ export default function UtentiPanel(props) {
                         </Form.Field>
                     </Form.Row>
                 </Form>
-                <Button customColor={"green"} onClick={e => saveElement()} disabled=
+                <Button bluelibClassNames={"color-green"} onClick={e => saveElement()} disabled=
                     {password2!=password || password=="" || email == "" || name == "" || surname == ""}>
                     <FontAwesomeIcon icon={faSave}/></Button>
             </Box>

@@ -128,6 +128,14 @@ def update_summary(db: Session, summary: schemas.Summary, sid: int, description:
     return db_summary
 
 
+def remove_summary(db: Session, sid: int):
+    db_summary: models.Summary = get_summary(db, sid)
+    for commit in db_summary.commits:
+        db.delete(commit)
+    db.delete(db_summary)
+    db.commit()
+
+
 def get_server(db: Session):
     return db.query(models.Server).first()
 

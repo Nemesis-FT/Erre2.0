@@ -7,7 +7,7 @@ import bcrypt
 from erre2.database import models
 from sqlalchemy.orm import Session
 from erre2.dependencies import get_db, SessionLocal
-from erre2.database.crud import get_user_by_email
+from erre2.database.crud import get_user_by_email, get_server
 from datetime import datetime, timedelta
 from passlib.context import CryptContext
 from erre2.database.db import SessionLocal
@@ -74,6 +74,13 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
             raise credentials_exception
         return user
 
+
+def check_admin(user):
+    with SessionLocal() as db:
+        server = get_server(db)
+        if server.owner_id!=user.uid:
+            return False
+        return True
 
 
 

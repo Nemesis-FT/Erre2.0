@@ -1,10 +1,22 @@
 import React, {useEffect, useState} from "react";
 import Style from "../Panel.module.css";
-import {Anchor, Box, Button, Chapter, Field, Footer, Form, Heading, LayoutFill, Panel, Table} from "@steffo/bluelib-react";
+import {
+    Anchor,
+    Box,
+    Button,
+    Chapter,
+    Field,
+    Footer,
+    Form,
+    Heading,
+    LayoutFill,
+    Panel,
+    Table
+} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../../libs/Context";
 import {Link, useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSave} from "@fortawesome/free-solid-svg-icons";
+import {faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
 
 
 export default function ProfilePanel(props) {
@@ -18,8 +30,8 @@ export default function ProfilePanel(props) {
     const [password, setPassword] = useState("")
     const [password2, setPassword2] = useState("")
 
-    async function saveElement(){
-        const response = await fetch("http://" + instanceIp + "/users/"+props.user.uid, {
+    async function saveElement() {
+        const response = await fetch("http://" + instanceIp + "/users/" + props.user.uid, {
             method: "PATCH",
             credentials: "include",
             headers: {
@@ -37,6 +49,19 @@ export default function ProfilePanel(props) {
         if (response.status === 200) {
             props.setReload(!props.reload)
         }
+    }
+
+    async function removeElement() {
+        const response = await fetch("http://" + instanceIp + "/users/" + props.user.uid, {
+            method: "DELETE",
+            credentials: "include",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': "Bearer " + token,
+            }
+        });
+        props.setReload(!props.reload)
     }
 
     return (
@@ -62,17 +87,22 @@ export default function ProfilePanel(props) {
                     </Form.Row>
                     <Form.Row>
                         <Form.Field onSimpleChange={e => setPassword(e)} value={password} required={true}
-                                    placeholder={"Password"} validity={password!=""} type={"password"}>
+                                    placeholder={"Password"} validity={password != ""} type={"password"}>
                         </Form.Field>
                     </Form.Row>
                     <Form.Row>
                         <Form.Field onSimpleChange={e => setPassword2(e)} value={password2} required={true}
-                                    placeholder={"Password"} validity={password2==password && password2!=""} type={"password"}>
+                                    placeholder={"Password"} validity={password2 == password && password2 != ""}
+                                    type={"password"}>
                         </Form.Field>
                     </Form.Row>
                 </Form>
-                <Button customColor={"green"} onClick={e => saveElement()} disabled=
-                    {password2!=password || password=="" || email == "" || name == "" || surname == ""}>
+                {props.user.uid != props.uid && (
+                    <div><Button bluelibClassNames={"color-red"} onClick={e => removeElement()}><FontAwesomeIcon icon={faTrash}/></Button>
+                    <br/></div>
+                )}
+                <Button bluelibClassNames={"color-green"} onClick={e => saveElement()} disabled=
+                    {password2 != password || password == "" || email == "" || name == "" || surname == ""}>
                     <FontAwesomeIcon icon={faSave}/></Button>
             </Box>
         </div>

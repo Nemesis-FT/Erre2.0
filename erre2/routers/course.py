@@ -28,7 +28,8 @@ async def read_course_list(request: Request, course_id: Optional[int] = None, db
 
 
 @router.patch("/{course_id}", response_model=schemas.Course, tags=["courses"])
-async def patch_course(update: schemas.Course, course_id: int, db: Session = Depends(get_db)):
+async def patch_course(update: schemas.Course, course_id: int, db: Session = Depends(get_db),
+                       current_user: models.User = Depends(get_current_user)):
     """
     Allows course patching
     """
