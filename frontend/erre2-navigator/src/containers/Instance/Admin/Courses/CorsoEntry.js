@@ -1,11 +1,9 @@
-import React, {useEffect, useState} from "react";
-import Style from "../AdminHome.module.css";
-import {Anchor, Box, Button, Chapter, Field, Footer, Form, Heading, LayoutFill, Panel} from "@steffo/bluelib-react";
+import React, {useState} from "react";
+import {Box, Button, Chapter, Form, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../../libs/Context";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faEdit, faTrash, faSave} from "@fortawesome/free-solid-svg-icons";
-import {B} from "react-select/dist/index-4bd03571.esm";
+import {faEdit, faSave} from "@fortawesome/free-solid-svg-icons";
 
 
 export default function CorsoEntry(props) {

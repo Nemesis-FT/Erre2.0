@@ -1,20 +1,6 @@
-import React, {useEffect, useState} from "react";
-import {
-    Anchor,
-    Box,
-    Button,
-    Chapter,
-    Field,
-    Footer,
-    Form,
-    Heading,
-    LayoutFill,
-    Panel,
-    Table
-} from "@steffo/bluelib-react";
+import React, {useEffect} from "react";
 import {useAppContext} from "../libs/Context";
-import {Link, useHistory} from "react-router-dom";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useHistory} from "react-router-dom";
 
 
 export default function Resume(props) {

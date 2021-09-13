@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {Anchor, Box, Button, Chapter, Heading, ListUnordered, Panel} from "@steffo/bluelib-react";
+import React, {useState} from "react";
+import {Anchor, Box, Chapter, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../libs/Context";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import Style from "./Summary.module.css";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCloudDownloadAlt, faUser, faHistory, faAt} from "@fortawesome/free-solid-svg-icons";
+import {faAt, faCloudDownloadAlt, faHistory, faUser} from "@fortawesome/free-solid-svg-icons";
 import Commit from "./Commit";
 
 

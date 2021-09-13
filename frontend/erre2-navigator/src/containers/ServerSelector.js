@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {Anchor, Box, Button, Chapter, Dialog, Field, Form} from "@steffo/bluelib-react";
+import {Anchor, Box, Button, Dialog, Form} from "@steffo/bluelib-react";
 import {useAppContext} from "../libs/Context";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import Style from "./ServerSelector.module.css"
 import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'

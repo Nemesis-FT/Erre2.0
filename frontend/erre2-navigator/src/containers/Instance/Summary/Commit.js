@@ -1,10 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {Anchor, Box, Button, Chapter, Heading, ListUnordered, Panel} from "@steffo/bluelib-react";
-import {useAppContext} from "../../../libs/Context";
-import {Link, useHistory} from "react-router-dom";
-import Style from "./Summary.module.css";
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faCloudDownloadAlt, faUser, faHistory, faAt} from "@fortawesome/free-solid-svg-icons";
+import {Panel} from "@steffo/bluelib-react";
+import {useHistory} from "react-router-dom";
 
 
 export default function Summary(props) {

@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from "react";
-import Style from "./Homepage.module.css";
-import {Box, Button, Chapter, Field, Footer, Heading, LayoutFill, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../libs/Context";
-import {Link, useHistory} from "react-router-dom";
-import {useParams} from "react-router-dom"
+import {useHistory} from "react-router-dom";
 import SummarySelector from "./SummarySelector";
 import Summary from "./Summary/Summary";
 

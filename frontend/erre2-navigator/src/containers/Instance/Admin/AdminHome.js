@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import Style from "./AdminHome.module.css";
-import {Anchor, Box, Button, Chapter, Field, Footer, Form, Heading, LayoutFill, Panel} from "@steffo/bluelib-react";
+import {Box, Button, Chapter, Heading} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../libs/Context";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import CorsiPanel from "./Courses/CorsiPanel";
 import ServerPanel from "./Users/ServerPanel";
 import ProfilePanel from "./Users/ProfilePanel";

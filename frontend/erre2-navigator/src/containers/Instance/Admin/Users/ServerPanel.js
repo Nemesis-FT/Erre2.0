@@ -1,24 +1,9 @@
 import React, {useEffect, useState} from "react";
-import Style from "../Panel.module.css";
-import {
-    Anchor,
-    Box,
-    Button,
-    Chapter,
-    Field,
-    Footer,
-    Form,
-    Heading,
-    LayoutFill,
-    Panel,
-    Table
-} from "@steffo/bluelib-react";
+import {Box, Button, Chapter, Form, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../../libs/Context";
-import {Link, useHistory} from "react-router-dom";
-import Summary from "../../Summary/Summary";
-import CorsoEntry from "../Courses/CorsoEntry";
+import {useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faSave} from "@fortawesome/free-solid-svg-icons";
 
 
 export default function ServerPanel(props) {

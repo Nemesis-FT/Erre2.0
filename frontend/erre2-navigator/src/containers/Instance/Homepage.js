@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import Style from "./Homepage.module.css";
-import {Anchor, Box, Button, Chapter, Field, Footer, Heading, LayoutFill, Panel} from "@steffo/bluelib-react";
+import {Anchor, Box, Button, Chapter, Heading} from "@steffo/bluelib-react";
 import {useAppContext} from "../../libs/Context";
-import {Link, useHistory} from "react-router-dom";
-import {useParams} from "react-router-dom"
+import {useHistory, useParams} from "react-router-dom";
 import SummaryPanel from "./SummaryPanel";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'

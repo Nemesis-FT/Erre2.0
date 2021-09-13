@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import Routes from "./Routes";
 import './App.css';
 import {AppContext} from "./libs/Context"
 import React, {useEffect, useState} from "react";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import {Bluelib, Footer} from "@steffo/bluelib-react";
 
 function App() {
@@ -43,5 +42,4 @@ function App() {
         </Bluelib>
     );
 }
-
 export default App;

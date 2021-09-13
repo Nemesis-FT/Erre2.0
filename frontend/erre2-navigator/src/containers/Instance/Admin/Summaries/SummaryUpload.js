@@ -1,22 +1,7 @@
-import React, {useEffect, useState} from "react";
-import Style from "../Panel.module.css";
-import {
-    Anchor,
-    Box,
-    Button,
-    Chapter,
-    Field,
-    Footer,
-    Form,
-    Heading,
-    LayoutFill,
-    Panel,
-    Table
-} from "@steffo/bluelib-react";
+import React, {useState} from "react";
+import {Button, Field, Form} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../../libs/Context";
-import {Link, useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import SummarySelector from "../../SummarySelector";
 import {faSave} from "@fortawesome/free-solid-svg-icons";
 
 
