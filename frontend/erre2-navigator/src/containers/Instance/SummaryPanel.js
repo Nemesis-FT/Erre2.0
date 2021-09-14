@@ -42,7 +42,9 @@ export default function SummaryPanel() {
     return (
         <div>
             <SummarySelector setCourseId={setCourseId}/>
-            {summaryList.map(summary => <Summary summary={summary}/>)}
+            {summaryList.length >0 &&( <div>
+            {summaryList.map(summary => <Summary summary={summary}/>)}</div>)}
+            {summaryList.length === 0 && courseId &&( <div><br/>Non ci sono ancora riassunti per questa materia.</div>)}
         </div>
     );
 }

@@ -85,7 +85,7 @@ export default function CorsoEntry(props) {
                         </Form.Row>
                     </Form>
                     <Chapter>
-                        <Button customColor={"green"} onClick={e => updateCourse()}><FontAwesomeIcon icon={faSave}/></Button>
+                        <Button bluelibClassNames={"color-lime"} onClick={e => updateCourse()}><FontAwesomeIcon icon={faSave}/></Button>
                     </Chapter>
                 </Box>
             ):(<div></div>)}

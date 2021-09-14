@@ -56,7 +56,7 @@ export default function SummaryEdit(props) {
                 </Form.Row>
             </Form>
             <Chapter>
-                <Button bluelibClassNames={"color-green"} onClick={e => saveElement()} disabled=
+                <Button bluelibClassNames={"color-lime"} onClick={e => saveElement()} disabled=
                     {name == ""}>
                     <FontAwesomeIcon icon={faSave}/></Button>
                 <Button bluelibClassNames={"color-red"} onClick={e => deleteElement()}

@@ -56,7 +56,7 @@ export default function ServerPanel(props) {
         await loadData()
     }
 
-    async function saveElement(){
+    async function saveElement() {
         const response = await fetch("http://" + instanceIp + "/server/", {
             method: "PATCH",
             credentials: "include",
@@ -83,44 +83,47 @@ export default function ServerPanel(props) {
     return (
         <div>
             <Heading level={2}>Gestione server</Heading>
-            <Box>
-                <Form>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setName(e)} value={name} required={true}
-                                    placeholder={"Nome server"} validity={name != ""}>
-                        </Form.Field>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setUniversity(e)} value={university} required={true}
-                                    placeholder={"Università"} validity={university != ""}>
-                        </Form.Field>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setMonetization(e)} value={monetization} required={true}
-                                    placeholder={"Link monetizzazione"} validity={monetization != ""}>
-                        </Form.Field>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setMotd(e)} value={motd} required={true}
-                                    placeholder={"Messaggio del giorno"} validity={motd !== ""}>
-                        </Form.Field>
-                    </Form.Row>
-                </Form>
-                <Panel customColor={"red"}>Attenzione: modificare l'id admin trasferisce il controllo della piattaforma ad un altro utente.</Panel>
-                <Form>
+            <Panel>
+                <Box>
+                    <Form>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setName(e)} value={name} required={true}
+                                        placeholder={"Nome server"} validity={name != ""}>
+                            </Form.Field>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setUniversity(e)} value={university} required={true}
+                                        placeholder={"Università"} validity={university != ""}>
+                            </Form.Field>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setMonetization(e)} value={monetization} required={true}
+                                        placeholder={"Link monetizzazione"} validity={monetization != ""}>
+                            </Form.Field>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setMotd(e)} value={motd} required={true}
+                                        placeholder={"Messaggio del giorno"} validity={motd !== ""}>
+                            </Form.Field>
+                        </Form.Row>
+                    </Form>
+                    <Panel customColor={"red"}>Attenzione: modificare l'id admin trasferisce il controllo della
+                        piattaforma ad un altro utente.</Panel>
+                    <Form>
 
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setAdminId(e)} value={adminId} required={true}
-                                    placeholder={"Semestre"} validity={adminId !== "" && isNaN(adminId) !== true}>
-                        </Form.Field>
-                    </Form.Row>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setAdminId(e)} value={adminId} required={true}
+                                        placeholder={"Semestre"} validity={adminId !== "" && isNaN(adminId) !== true}>
+                            </Form.Field>
+                        </Form.Row>
 
-                </Form>
-                <Chapter>
-                    <Button bluelibClassNames={"color-green"} onClick={e => saveElement()}><FontAwesomeIcon icon={faSave}/></Button>
-                </Chapter>
-            </Box>
-
+                    </Form>
+                    <Chapter>
+                        <Button bluelibClassNames={"color-green"} onClick={e => saveElement()}><FontAwesomeIcon
+                            icon={faSave}/></Button>
+                    </Chapter>
+                </Box>
+            </Panel>
 
         </div>
     );

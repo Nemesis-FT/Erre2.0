@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {Anchor, Box, Button, Dialog, Form} from "@steffo/bluelib-react";
+import {Box, Button, Dialog, Form} from "@steffo/bluelib-react";
 import {useAppContext} from "../libs/Context";
 import {useHistory} from "react-router-dom";
 import Style from "./ServerSelector.module.css"
@@ -88,45 +88,47 @@ export default function ServerSelector() {
                         </Form.Field>
                     </Form.Row>
                 </Form>
-                {isChecking ? (
-                    <div>Verifica in corso...</div>
-                ) : (
-                    <div></div>
-                )}
-                {isValid ? (
-                    <div>
-                        <Dialog customColor={"#6fd052"}>
-                            {server.name} ({server.university})
-                            <p> {server.type} v. {server.version} </p>
-                        </Dialog>
-                    </div>
-                ) : (
-                    <div>
+                <Form.Row>
+                    {isChecking ? (
+                        <div>Verifica in corso...</div>
+                    ) : (
+                        <div></div>
+                    )}
 
-                    </div>
-                )}
+                    {isValid ? (
+                        <div>
+                            <Dialog bluelibClassNames={"color-lime"}>
+                                {server.name} ({server.university})
+                                <p> {server.type} v. {server.version} </p>
+                            </Dialog>
+                        </div>
+                    ) : (
+                        <div>
 
+                        </div>
+                    )}
+
+                    <Button children={"Connettiti"} disabled={!isValid} onClick={e => connect()}>
+
+                    </Button>
+                </Form.Row>
             </Box>
-            <Button children={"Connettiti"} disabled={!isValid} onClick={e => connect()}>
 
-            </Button>
-            <Box>
-                <Anchor onClick={(e) => {
-                    setHidden(!hidden)
-                }}><FontAwesomeIcon icon={faQuestionCircle}/></Anchor>
-                {hidden ? (<div></div>) : (
-                    <p> Il navigatore ti consente di esplorare la costellazione di istanze di Erre2, appartenenti a
-                        diversi
-                        gruppi di studenti. Per consultare i riassunti di un certo gruppo, devi inserire l'indirizzo
-                        dell'istanza
-                        corrispondente. E' possibile far registrare la propria istanza all'interno della costellazione
-                        ufficiale di
-                        Erre2, e questa sarà raggiungibile dal servizio "Planetario".</p>)}
+            <Button onClick={(e) => {
+                setHidden(!hidden)
+            }}><FontAwesomeIcon icon={faQuestionCircle}/></Button>
+            {hidden ? (<div></div>) : (
+                <p> Il navigatore ti consente di esplorare la costellazione di istanze di Erre2, appartenenti a
+                    diversi
+                    gruppi di studenti. Per consultare i riassunti di un certo gruppo, devi inserire l'indirizzo
+                    dell'istanza
+                    corrispondente. E' possibile far registrare la propria istanza all'interno della costellazione
+                    ufficiale di
+                    Erre2, e questa sarà raggiungibile dal servizio "Planetario".</p>)}
 
-            </Box>
             <Box className={Style.Scrollable}>
                 {favList ? (
-                    <div>{favList.map(fav => <ServerFav fav={fav}/>)}</div>
+                    <div>{favList.map(fav => <ServerFav fav={fav} setFav={setFavList} favList={favList}/>)}</div>
                 ) : (
                     <p>Nessun server tra i preferiti. Per aggiungerne, clicca sulla stella di fianco al nome di un
                         server.</p>

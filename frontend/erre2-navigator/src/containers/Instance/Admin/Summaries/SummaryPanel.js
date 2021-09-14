@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Style from "../Panel.module.css";
-import {Box, Heading} from "@steffo/bluelib-react";
+import {Box, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../../libs/Context";
 import SummaryEntry from "./SummaryEntry";
 import SummaryCreate from "./SummaryCreate";
@@ -19,7 +19,7 @@ export default function SummaryPanel(props) {
         onLoad()
     ), [reload])
 
-    async function onLoad(){
+    async function onLoad() {
         const response = await fetch("http://" + instanceIp + "/summary/", {
             method: "GET",
             credentials: "include",
@@ -39,13 +39,16 @@ export default function SummaryPanel(props) {
     return (
         <div>
             <Heading level={2}>Gestione riassunti</Heading>
-            <Box>
-                <div className={extend ? (Style.ScrollableExtendedShorter) : (Style.Scrollable)}>
-                    {summaries.map(summary => <SummaryEntry summary={summary} setReload={setReload} reload={reload}
-                                                     setExtend={setExtend} isAdmin={props.isAdmin} user={props.user}/>)}
-                </div>
-            </Box>
-            <SummaryCreate user={props.user} reload={reload} setReload={setReload}/>
+            <Panel>
+                <Box>
+                    <div className={extend ? (Style.ScrollableExtendedShorter) : (Style.Scrollable)}>
+                        {summaries.map(summary => <SummaryEntry summary={summary} setReload={setReload} reload={reload}
+                                                                setExtend={setExtend} isAdmin={props.isAdmin}
+                                                                user={props.user}/>)}
+                    </div>
+                </Box>
+                <SummaryCreate user={props.user} reload={reload} setReload={setReload}/>
+            </Panel>
         </div>
     );
 }

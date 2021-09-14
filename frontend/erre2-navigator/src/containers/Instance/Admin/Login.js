@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Style from "./Login.module.css";
-import {Box, Button, Chapter, Form, Heading} from "@steffo/bluelib-react";
+import {Box, Button, Chapter, Form, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../libs/Context";
 import {useHistory} from "react-router-dom";
 
@@ -62,6 +62,7 @@ export default function Login() {
                     <Heading level={1}>Login</Heading>
                     <p>Per accedere al pannello amministrativo dell'istanza, inserisci le credenziali.</p>
                 </div>
+                <Panel>
                 <Box>
                     <Form>
                         <Form.Row>
@@ -86,6 +87,7 @@ export default function Login() {
                         </div>
                     </Chapter>
                 </Box>
+                </Panel>
             </div>
 
         </div>

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Style from "./AdminHome.module.css";
-import {Box, Button, Chapter, Heading} from "@steffo/bluelib-react";
+import {Box, Button, Chapter, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../libs/Context";
 import {useHistory} from "react-router-dom";
 import CorsiPanel from "./Courses/CorsiPanel";
@@ -104,13 +104,14 @@ export default function Login() {
     }
 
     return (
-            <div className={Style.Home}>
-                {mode == "" && (
-                    <div>
+        <div className={Style.Home}>
+            {mode == "" && (
+                <div>
 
-                        <p>Questo è il pannello amministrativo di questa istanza di Erre2.</p>
-                        {user ? (<Button bluelibClassNames={"color-red"} onClick={e => logout()}>Logout</Button>) : (
-                            <Button>...</Button>)}
+                    <p>Questo è il pannello amministrativo di questa istanza di Erre2.</p>
+                    {user ? (<Button bluelibClassNames={"color-red"} onClick={e => logout()}>Logout</Button>) : (
+                        <Button>...</Button>)}
+                    <Panel>
                         <Box>
                             <Chapter>
                                 <Button onClick={e => setMode("corsi")}>Gestione Corsi</Button>
@@ -119,36 +120,39 @@ export default function Login() {
                             </Chapter>
 
                         </Box>
-                        {isOwner ? (<Box><Chapter><Button onClick={e => setMode("utenti")}>Gestione Utenti</Button>
-                            <Button onClick={e => setMode("server")}>Gestione Server</Button></Chapter></Box>) : (
-                            <div></div>)}
+                    </Panel>
+                    {isOwner ? (<Panel><Box><Chapter><Button onClick={e => setMode("utenti")}>Gestione Utenti</Button>
+                        <Button onClick={e => setMode("server")}>Gestione Server</Button></Chapter></Box></Panel>) : (
+                        <div></div>)}
 
-                    </div>
-                )}
+                </div>
+            )}
 
-                {mode != "" && (
-                    <div className={Style.TopButton}>
-                        <Button onClick={e => setMode("")}>Torna indietro</Button>
-                    </div>
-                )}
-                {mode == "corsi" && (
-                    <CorsiPanel/>
-                )}
-                {mode == "riassunti" && (
-                    <SummaryPanel user={user} isAdmin={isOwner}/>
-                )}
-                {mode == "profilo" && (
-                    <div>
-                        <Heading level={2}>Gestione profilo</Heading>
+            {mode != "" && (
+                <div className={Style.TopButton}>
+                    <Button onClick={e => setMode("")}>Torna indietro</Button>
+                </div>
+            )}
+            {mode == "corsi" && (
+                <CorsiPanel/>
+            )}
+            {mode == "riassunti" && (
+                <SummaryPanel user={user} isAdmin={isOwner}/>
+            )}
+            {mode == "profilo" && (
+                <div>
+                    <Heading level={2}>Gestione profilo</Heading>
+                    <Panel>
                         <ProfilePanel user={user} reload={reload} setReload={setReload} uid={user.uid}/>
-                    </div>
-                )}
-                {mode == "utenti" && (
-                    <UtentiPanel uid={user.uid}/>
-                )}
-                {mode == "server" && (
-                    <ServerPanel isOwner={isOwner}/>
-                )}
-            </div>
+                    </Panel>
+                </div>
+            )}
+            {mode == "utenti" && (
+                <UtentiPanel uid={user.uid}/>
+            )}
+            {mode == "server" && (
+                <ServerPanel isOwner={isOwner}/>
+            )}
+        </div>
     );
 }

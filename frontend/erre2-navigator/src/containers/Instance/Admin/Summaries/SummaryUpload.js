@@ -50,7 +50,7 @@ export default function SummaryUpload(props) {
                     <Field type={"file"} onChange={e => setFile(e.target.files[0])} placeholder={"File..."}/>
                 </Form.Row>
             </Form>
-            <Button bluelibClassNames={"color-green"} onClick={e => saveElement()} disabled=
+            <Button bluelibClassNames={"color-lime"} onClick={e => saveElement()} disabled=
                 {desc == "" || file == null}>
                 <FontAwesomeIcon icon={faSave}/></Button>
         </div>

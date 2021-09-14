@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Style from "../Panel.module.css";
-import {Box, Button, Chapter, Form, Heading} from "@steffo/bluelib-react";
+import {Box, Button, Chapter, Form, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../../libs/Context";
 import {useHistory} from "react-router-dom";
 import CorsoEntry from "./CorsoEntry";
@@ -67,7 +67,7 @@ export default function CorsiPanel() {
         await loadCourse()
     }
 
-    async function saveElement(){
+    async function saveElement() {
         const response = await fetch("http://" + instanceIp + "/course/", {
             method: "POST",
             credentials: "include",
@@ -100,43 +100,45 @@ export default function CorsiPanel() {
     return (
         <div>
             <Heading level={2}>Gestione corsi</Heading>
-            <Box>
-                <div className={extend ? (Style.ScrollableExtended) : (Style.Scrollable)}>
-                    {courses.map(course => <CorsoEntry course={course} setReload={setReload} reload={reload}
-                                                       setExtend={setExtend}/>)}
-                </div>
-            </Box>
-            <Box>
-                <Form>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setName(e)} value={name} required={true}
-                                    placeholder={"Nome"} validity={name != ""}>
-                        </Form.Field>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setProfessor(e)} value={professor} required={true}
-                                    placeholder={"Docente"} validity={professor != ""}>
-                        </Form.Field>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setCurriculum(e)} value={curriculum} required={true}
-                                    placeholder={"Curriculum"} validity={curriculum != ""}>
-                        </Form.Field>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setYear(e)} value={year} required={true}
-                                    placeholder={"Anno"} validity={year !== "" && isNaN(year) !== true}>
-                        </Form.Field>
-                        <Form.Field onSimpleChange={e => setSemester(e)} value={semester} required={true}
-                                    placeholder={"Semestre"} validity={semester !== "" && isNaN(semester) !== true}>
-                        </Form.Field>
-                    </Form.Row>
-                </Form>
-                <Chapter>
-                    <Button customColor={"green"} onClick={e => saveElement()}><FontAwesomeIcon icon={faSave}/></Button>
-                </Chapter>
-            </Box>
-
+            <Panel>
+                <Box>
+                    <div className={extend ? (Style.ScrollableExtended) : (Style.Scrollable)}>
+                        {courses.map(course => <CorsoEntry course={course} setReload={setReload} reload={reload}
+                                                           setExtend={setExtend}/>)}
+                    </div>
+                </Box>
+                <Box>
+                    <Form>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setName(e)} value={name} required={true}
+                                        placeholder={"Nome"} validity={name != ""}>
+                            </Form.Field>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setProfessor(e)} value={professor} required={true}
+                                        placeholder={"Docente"} validity={professor != ""}>
+                            </Form.Field>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setCurriculum(e)} value={curriculum} required={true}
+                                        placeholder={"Curriculum"} validity={curriculum != ""}>
+                            </Form.Field>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setYear(e)} value={year} required={true}
+                                        placeholder={"Anno"} validity={year !== "" && isNaN(year) !== true}>
+                            </Form.Field>
+                            <Form.Field onSimpleChange={e => setSemester(e)} value={semester} required={true}
+                                        placeholder={"Semestre"} validity={semester !== "" && isNaN(semester) !== true}>
+                            </Form.Field>
+                        </Form.Row>
+                    </Form>
+                    <Chapter>
+                        <Button bluelibClassNames={"color-lime"} onClick={e => saveElement()}><FontAwesomeIcon
+                            icon={faSave}/></Button>
+                    </Chapter>
+                </Box>
+            </Panel>
 
         </div>
     );

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Style from "./Homepage.module.css";
-import {Anchor, Box, Button, Chapter, Heading} from "@steffo/bluelib-react";
+import {Anchor, Box, Button, Chapter, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../libs/Context";
 import {useHistory, useParams} from "react-router-dom";
 import SummaryPanel from "./SummaryPanel";
@@ -30,7 +30,9 @@ export default function Home() {
             let el = {name: server.server.name, address: instanceIp, university: server.server.university}
             if (localStorage.getItem("favs")) {
                 let favs = JSON.parse(localStorage.getItem("favs"))
-                let addresses = favs.map(f=>{return f.address})
+                let addresses = favs.map(f => {
+                    return f.address
+                })
                 if (addresses.includes(instanceIp)) {
                     console.debug("subs")
                     setIsFav(true)
@@ -71,13 +73,17 @@ export default function Home() {
     async function addFav() {
         let el = {name: server.server.name, address: instanceIp, university: server.server.university}
         if (localStorage.getItem("favs")) {
+            console.debug("Favs are present!")
             let favs = JSON.parse(localStorage.getItem("favs"))
-            let addresses = favs.map(f=>{return f.address})
+            let addresses = favs.map(f => {
+                return f.address
+            })
             if (addresses.includes(instanceIp)) {
                 return;
             }
-            favs.push()
+            favs.push(el)
             localStorage.setItem("favs", JSON.stringify(favs))
+            console.debug(localStorage.getItem("favs"))
         } else {
             localStorage.setItem("favs", JSON.stringify([el,]))
         }
@@ -94,37 +100,41 @@ export default function Home() {
                                 icon={faStar} onClick={e => addFav()}/>) : (<div/>)}
                         </Heading>
                         <p className="text-muted">{server.server.university}</p>
-                        <Box><Anchor onClick={(e) => {
-                            setShowInfo(!showInfo)
-                        }}>Informazioni sul server</Anchor>
+                        <Panel>
+                            <Button onClick={(e) => {
+                                setShowInfo(!showInfo)
+                            }}>Informazioni sul server</Button>
                             {showInfo ? (
-                                <div>
+                                <Panel>
                                     <p>
                                         "{server.server.motd}"
                                     </p>
                                     I riassunti su questa istanza sono pubblicati
-                                    da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC BY-SA
+                                    da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC
+                                    BY-SA
                                     4.0.
-                                </div>
+                                </Panel>
                             ) : (
                                 <div></div>
                             )}
-
-                        </Box>
-                        <Box>Vuoi supportare le persone che contribuiscono a questa istanza? <p><Anchor
-                            href={server.server.monetization_link}>Perchè
-                            non gli offri un caffè?</Anchor></p></Box>
+                            <Box>Vuoi supportare le persone che contribuiscono a questa istanza? <p><Anchor
+                                href={server.server.monetization_link}>Perchè
+                                non gli offri un caffè?</Anchor></p></Box>
+                        </Panel>
                     </div>
-                    <Chapter>
-                        <div>
-                            <Button children={"Accedi"} onClick={e => history.push("/login")}></Button>
-                        </div>
-                        <div>
-                            <Button children={"Disconnettiti"} onClick={e => disconnect()}></Button>
-                        </div>
-                    </Chapter>
-
-                    <SummaryPanel/>
+                    <Panel>
+                        <Chapter>
+                            <div>
+                                <Button children={"Accedi"} onClick={e => history.push("/login")}></Button>
+                            </div>
+                            <div>
+                                <Button children={"Disconnettiti"} onClick={e => disconnect()}></Button>
+                            </div>
+                        </Chapter>
+                    </Panel>
+                    <Panel>
+                        <SummaryPanel/>
+                    </Panel>
                 </div>
 
             ) : (

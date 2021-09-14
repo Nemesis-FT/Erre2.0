@@ -8,9 +8,6 @@ import SummaryEdit from "./SummaryEdit";
 
 
 export default function SummaryEntry(props) {
-    const {instanceIp, setInstanceIp} = useAppContext()
-    const {connected, setConnected} = useAppContext()
-    const {token, setToken} = useAppContext()
 
     const [mode, setMode] = useState("")
 

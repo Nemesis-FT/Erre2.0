@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Style from "../Panel.module.css";
-import {Box, Button, Form, Heading} from "@steffo/bluelib-react";
+import {Box, Button, Form, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../../libs/Context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserEntry from "./UserEntry";
@@ -25,7 +25,7 @@ export default function UtentiPanel(props) {
         loadData()
     ), [refresh])
 
-    async function loadData(){
+    async function loadData() {
         let response = await fetch("http://" + instanceIp + "/users/", {
             method: "GET",
             credentials: "include",
@@ -42,7 +42,7 @@ export default function UtentiPanel(props) {
         }
     }
 
-    async function saveElement(){
+    async function saveElement() {
         let response = await fetch("http://" + instanceIp + "/users/", {
             method: "POST",
             credentials: "include",
@@ -73,44 +73,48 @@ export default function UtentiPanel(props) {
     return (
         <div>
             <Heading level={2}>Gestione utenti</Heading>
-            <Box>
-                <div className={extend ? (Style.ScrollableExtended) : (Style.Scrollable)}>
-                    {userList.map(user => <UserEntry user={user} setReload={setRefresh} reload={refresh}
-                                                       setExtend={setExtend} uid={props.uid}/>)}
-                </div>
-            </Box>
-            <Box>
-                <Form>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setName(e)} value={name} required={true}
-                                    placeholder={"Nome"} validity={name != ""}>
-                        </Form.Field>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setSurname(e)} value={surname} required={true}
-                                    placeholder={"Cognome"} validity={surname != ""}>
-                        </Form.Field>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setEmail(e)} value={email} required={true}
-                                    placeholder={"Email"} validity={email != ""}>
-                        </Form.Field>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setPassword(e)} value={password} required={true}
-                                    placeholder={"Password"} validity={password!=""} type={"password"}>
-                        </Form.Field>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Field onSimpleChange={e => setPassword2(e)} value={password2} required={true}
-                                    placeholder={"Password"} validity={password2==password && password2!=""} type={"password"}>
-                        </Form.Field>
-                    </Form.Row>
-                </Form>
-                <Button bluelibClassNames={"color-green"} onClick={e => saveElement()} disabled=
-                    {password2!=password || password=="" || email == "" || name == "" || surname == ""}>
-                    <FontAwesomeIcon icon={faSave}/></Button>
-            </Box>
+            <Panel>
+                <Box>
+                    <div className={extend ? (Style.ScrollableExtended) : (Style.Scrollable)}>
+                        {userList.map(user => <UserEntry user={user} setReload={setRefresh} reload={refresh}
+                                                         setExtend={setExtend} uid={props.uid}/>)}
+                    </div>
+                </Box>
+
+                <Box>
+                    <Form>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setName(e)} value={name} required={true}
+                                        placeholder={"Nome"} validity={name != ""}>
+                            </Form.Field>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setSurname(e)} value={surname} required={true}
+                                        placeholder={"Cognome"} validity={surname != ""}>
+                            </Form.Field>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setEmail(e)} value={email} required={true}
+                                        placeholder={"Email"} validity={email != ""}>
+                            </Form.Field>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setPassword(e)} value={password} required={true}
+                                        placeholder={"Password"} validity={password != ""} type={"password"}>
+                            </Form.Field>
+                        </Form.Row>
+                        <Form.Row>
+                            <Form.Field onSimpleChange={e => setPassword2(e)} value={password2} required={true}
+                                        placeholder={"Password"} validity={password2 == password && password2 != ""}
+                                        type={"password"}>
+                            </Form.Field>
+                        </Form.Row>
+                    </Form>
+                    <Button bluelibClassNames={"color-green"} onClick={e => saveElement()} disabled=
+                        {password2 != password || password == "" || email == "" || name == "" || surname == ""}>
+                        <FontAwesomeIcon icon={faSave}/></Button>
+                </Box>
+            </Panel>
         </div>
     );
 }

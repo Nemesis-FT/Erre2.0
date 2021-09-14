@@ -26,8 +26,8 @@ origins = [
     "http://localhost",
     "http://localhost:8080",
     "http://localhost:3000",
-    "http://localhost:5000"
-    "http://navigator.erre2.fermitech.info:80"
+    "http://localhost:5000",
+    "https://navigator.erre2.fermitech.info"
 ]
 
 app.add_middleware(

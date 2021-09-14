@@ -6,6 +6,7 @@ import NotFound from "./containers/NotFound";
 import Login from "./containers/Instance/Admin/Login"
 import AdminHome from "./containers/Instance/Admin/AdminHome"
 import Resume from "./containers/Resume";
+import Download from "./containers/Instance/Summary/Download"
 
 export default function Routes() {
     return (
@@ -18,6 +19,7 @@ export default function Routes() {
                 <Route exact path ="/erre2/:url" children={<Homepage/>}/>
                 <Route exact path ="/login" children={<Login/>}/>
                 <Route exact path ="/admin" children={<AdminHome/>}/>
+                <Route exact path ="/erre2/:url/download/:sid" children={<Download/>}/>
                 <Route>
                     <NotFound/>
                 </Route>

@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {Panel} from "@steffo/bluelib-react";
-import {useHistory} from "react-router-dom";
 
 
 export default function Summary(props) {
-    let history = useHistory();
     const [date, setDate] = useState(null)
 
     useEffect((e)=>{

@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import {Anchor, Box, Chapter, Heading, Panel} from "@steffo/bluelib-react";
+import {Anchor, Box, Button, Chapter, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../libs/Context";
 import {useHistory} from "react-router-dom";
 import Style from "./Summary.module.css";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faAt, faCloudDownloadAlt, faHistory, faUser} from "@fortawesome/free-solid-svg-icons";
+import {faAt, faCloudDownloadAlt, faHistory, faShare, faUser} from "@fortawesome/free-solid-svg-icons";
 import Commit from "./Commit";
 
 
@@ -33,6 +33,13 @@ export default function Summary(props) {
         }
     }
 
+    async function share(){
+        await navigator.share({title:"Erre2-Navigator", text:`
+        ${props.summary.name} di ${props.summary.author.name} ${props.summary.author.surname} su un'istanza privata di 
+        Erre2, la piattaforma distribuita per la condivisione di appunti.
+        `, url:"https://navigator.erre2.fermitech.info/erre2/" + instanceIp + "/download/" + props.summary.sid})
+    }
+
 
     return (
         <div>
@@ -42,22 +49,29 @@ export default function Summary(props) {
                         {props.summary.name}
                     </Panel>
                     <Panel>
-                        {props.summary.downloads} Download
+                        {props.summary.downloads} <FontAwesomeIcon icon={faCloudDownloadAlt}/>
                     </Panel>
                 </Chapter>
                 <Chapter>
-                    <div><Anchor onClick={(e) => {
+                    <div><Button onClick={(e) => {
                         download()
-                    }}><FontAwesomeIcon icon={faCloudDownloadAlt} label={"Download"}/></Anchor></div>
+                    }} bluelibClassNames={"color-yellow"}><FontAwesomeIcon icon={faCloudDownloadAlt}
+                                                                           label={"Download"}/></Button></div>
+                    <div><Button onClick={(e) => {
+                        share()
+                    }} bluelibClassNames={"color-yellow"}><FontAwesomeIcon icon={faShare}
+                                                                           label={"Condividi"}/></Button></div>
                     <div>
-                        <Anchor onClick={(e) => {
+
+                        <Button onClick={(e) => {
                             setShowAuthor(!showAuthor)
-                        }}><FontAwesomeIcon icon={faUser} label={"Autore"}/></Anchor>
+                        }} bluelibClassNames={"color-yellow"}><FontAwesomeIcon icon={faUser} label={"Autore"}/></Button>
                     </div>
                     <div>
-                        <Anchor onClick={(e) => {
+                        <Button onClick={(e) => {
                             setShowHistory(!showHistory)
-                        }}><FontAwesomeIcon icon={faHistory} label={"Changelog"}/></Anchor>
+                        }} bluelibClassNames={"color-yellow"}><FontAwesomeIcon icon={faHistory}
+                                                                               label={"Changelog"}/></Button>
                     </div>
                 </Chapter>
                 <div className={Style.Animated}>
@@ -66,7 +80,8 @@ export default function Summary(props) {
                             <Heading level={4}>Informazioni sull'autore</Heading>
                             <p>
                                 {props.summary.author.name} {props.summary.author.surname} <Anchor
-                                href={"mailto:" + props.summary.author.email}><FontAwesomeIcon icon={faAt} label={"Manda email"}/></Anchor>
+                                href={"mailto:" + props.summary.author.email}><FontAwesomeIcon icon={faAt}
+                                                                                               label={"Manda email"}/></Anchor>
                             </p>
                         </Panel>
                     ) : (
@@ -76,7 +91,7 @@ export default function Summary(props) {
                         <Panel>
                             <Heading level={4}>Changelog</Heading>
                             <div className={Style.Scrollable}>
-                                    {props.summary.commits.map(commit => <Commit commit={commit}/>)}
+                                {props.summary.commits.map(commit => <Commit commit={commit}/>)}
                             </div>
                         </Panel>
                     ) : (

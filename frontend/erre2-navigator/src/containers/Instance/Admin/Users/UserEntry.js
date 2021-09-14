@@ -1,15 +1,11 @@
 import React, {useState} from "react";
 import {Button, Chapter, Panel} from "@steffo/bluelib-react";
-import {useAppContext} from "../../../../libs/Context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEdit} from "@fortawesome/free-solid-svg-icons";
 import ProfilePanel from "./ProfilePanel";
 
 
 export default function UserEntry(props) {
-    const {instanceIp, setInstanceIp} = useAppContext()
-    const {connected, setConnected} = useAppContext()
-    const {token, setToken} = useAppContext()
 
     const [edit, setEdit] = useState(false)
 
