@@ -3,6 +3,7 @@ import {Button, Chapter, Form} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../../libs/Context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
+import schema from "../../../config";
 
 
 export default function SummaryEdit(props) {
@@ -13,7 +14,7 @@ export default function SummaryEdit(props) {
     const [name, setName] = useState(props.summary.name)
 
     async function saveElement() {
-        const response = await fetch("http://" + instanceIp + "/summary/"+props.summary.sid, {
+        const response = await fetch(schema + instanceIp + "/summary/"+props.summary.sid, {
             method: "PUT",
             credentials: "include",
             headers: {
@@ -33,7 +34,7 @@ export default function SummaryEdit(props) {
     }
 
     async function deleteElement() {
-        const response = await fetch("http://" + instanceIp + "/summary/"+props.summary.sid, {
+        const response = await fetch(schema + instanceIp + "/summary/"+props.summary.sid, {
             method: "DELETE",
             credentials: "include",
             headers: {

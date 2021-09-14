@@ -4,6 +4,7 @@ import {Box, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../../libs/Context";
 import SummaryEntry from "./SummaryEntry";
 import SummaryCreate from "./SummaryCreate";
+import schema from "../../../config";
 
 
 export default function SummaryPanel(props) {
@@ -20,7 +21,7 @@ export default function SummaryPanel(props) {
     ), [reload])
 
     async function onLoad() {
-        const response = await fetch("http://" + instanceIp + "/summary/", {
+        const response = await fetch(schema + instanceIp + "/summary/", {
             method: "GET",
             credentials: "include",
             headers: {

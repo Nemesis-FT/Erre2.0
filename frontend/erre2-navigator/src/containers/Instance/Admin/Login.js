@@ -3,6 +3,7 @@ import Style from "./Login.module.css";
 import {Box, Button, Chapter, Form, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../libs/Context";
 import {useHistory} from "react-router-dom";
+import schema from "../../config";
 
 
 export default function Login() {
@@ -34,7 +35,7 @@ export default function Login() {
         }
         formB = formB.join("&");
 
-        const response = await fetch("http://" + instanceIp + "/token", {
+        const response = await fetch(schema + instanceIp + "/token", {
             method: "POST",
             credentials: "include",
             headers: {

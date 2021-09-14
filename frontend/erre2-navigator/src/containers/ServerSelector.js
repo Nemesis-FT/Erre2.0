@@ -6,6 +6,7 @@ import Style from "./ServerSelector.module.css"
 import {faQuestionCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import ServerFav from "./ServerFav";
+import schema from "./config";
 
 export default function ServerSelector() {
     const [address, setAddress] = useState("");
@@ -35,7 +36,7 @@ export default function ServerSelector() {
     async function conn_check() {
         setIsChecking(true);
         try {
-            const response = await fetch("http://" + address + "/server/planetarium", {
+            const response = await fetch(schema + address + "/server/planetarium", {
                 method: "GET",
                 credentials: "include",
                 headers: {

@@ -8,6 +8,7 @@ import ServerPanel from "./Users/ServerPanel";
 import ProfilePanel from "./Users/ProfilePanel";
 import UtentiPanel from "./Users/UtentiPanel";
 import SummaryPanel from "./Summaries/SummaryPanel";
+import schema from "../../config";
 
 
 export default function Login() {
@@ -36,7 +37,7 @@ export default function Login() {
     }, [reload])
 
     async function loadCourse() {
-        const response = await fetch("http://" + instanceIp + "/course/", {
+        const response = await fetch(schema + instanceIp + "/course/", {
             method: "GET",
             credentials: "include",
             headers: {
@@ -58,7 +59,7 @@ export default function Login() {
 
     async function loadUserData() {
         let uid = null
-        let response = await fetch("http://" + instanceIp + "/users/me", {
+        let response = await fetch(schema + instanceIp + "/users/me", {
             method: "GET",
             credentials: "include",
             headers: {
@@ -73,7 +74,7 @@ export default function Login() {
             setUser(values)
             uid = values.uid
         }
-        response = await fetch("http://" + instanceIp + "/server/planetarium", {
+        response = await fetch(schema + instanceIp + "/server/planetarium", {
             method: "GET",
             credentials: "include",
             headers: {

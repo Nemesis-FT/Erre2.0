@@ -4,6 +4,7 @@ import {useAppContext} from "../../../../libs/Context";
 import {useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSave} from "@fortawesome/free-solid-svg-icons";
+import schema from "../../../config";
 
 
 export default function ServerPanel(props) {
@@ -33,7 +34,7 @@ export default function ServerPanel(props) {
     }, [reload])
 
     async function loadData() {
-        const response = await fetch("http://" + instanceIp + "/server/", {
+        const response = await fetch(schema + instanceIp + "/server/", {
             method: "GET",
             credentials: "include",
             headers: {
@@ -57,7 +58,7 @@ export default function ServerPanel(props) {
     }
 
     async function saveElement() {
-        const response = await fetch("http://" + instanceIp + "/server/", {
+        const response = await fetch(schema + instanceIp + "/server/", {
             method: "PATCH",
             credentials: "include",
             headers: {

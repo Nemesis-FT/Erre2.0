@@ -6,6 +6,7 @@ import {useHistory} from "react-router-dom";
 import CorsoEntry from "./CorsoEntry";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSave} from "@fortawesome/free-solid-svg-icons";
+import schema from "../../../config";
 
 
 export default function CorsiPanel() {
@@ -47,7 +48,7 @@ export default function CorsiPanel() {
     }, [reload])
 
     async function loadCourse() {
-        const response = await fetch("http://" + instanceIp + "/course/", {
+        const response = await fetch(schema + instanceIp + "/course/", {
             method: "GET",
             credentials: "include",
             headers: {
@@ -68,7 +69,7 @@ export default function CorsiPanel() {
     }
 
     async function saveElement() {
-        const response = await fetch("http://" + instanceIp + "/course/", {
+        const response = await fetch(schema + instanceIp + "/course/", {
             method: "POST",
             credentials: "include",
             headers: {

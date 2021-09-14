@@ -5,6 +5,7 @@ import {
     Heading, Image,
 } from "@steffo/bluelib-react";
 import {useParams} from "react-router-dom";
+import schema from "../../config";
 
 
 export default function Download(props) {
@@ -16,7 +17,7 @@ export default function Download(props) {
     ), [sid])
 
     async function download() {
-        const response = await fetch("http://" + url + "/summary/download/" + sid, {
+        const response = await fetch(schema + url + "/summary/download/" + sid, {
             method: "GET",
             credentials: "include",
             headers: {
@@ -28,7 +29,7 @@ export default function Download(props) {
         if (response.status === 200) {
             let values = await response.json()
             console.debug(values)
-            window.open("http://" + url + "/files/" + values.filename)
+            window.open(schema + url + "/files/" + values.filename)
         }
     }
 

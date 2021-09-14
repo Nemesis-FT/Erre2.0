@@ -4,6 +4,7 @@ import {useAppContext} from "../../../../libs/Context";
 import {useHistory} from "react-router-dom";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faEdit, faSave} from "@fortawesome/free-solid-svg-icons";
+import schema from "../../../config";
 
 
 export default function CorsoEntry(props) {
@@ -19,7 +20,7 @@ export default function CorsoEntry(props) {
     let history = useHistory();
 
     async function updateCourse() {
-        const response = await fetch("http://" + instanceIp + "/course/"+props.course.cid, {
+        const response = await fetch(schema + instanceIp + "/course/"+props.course.cid, {
             method: "PATCH",
             credentials: "include",
             headers: {

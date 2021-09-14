@@ -5,6 +5,7 @@ import {useAppContext} from "../../../../libs/Context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import UserEntry from "./UserEntry";
 import {faSave} from "@fortawesome/free-solid-svg-icons";
+import schema from "../../../config";
 
 
 export default function UtentiPanel(props) {
@@ -26,7 +27,7 @@ export default function UtentiPanel(props) {
     ), [refresh])
 
     async function loadData() {
-        let response = await fetch("http://" + instanceIp + "/users/", {
+        let response = await fetch(schema + instanceIp + "/users/", {
             method: "GET",
             credentials: "include",
             headers: {
@@ -43,7 +44,7 @@ export default function UtentiPanel(props) {
     }
 
     async function saveElement() {
-        let response = await fetch("http://" + instanceIp + "/users/", {
+        let response = await fetch(schema + instanceIp + "/users/", {
             method: "POST",
             credentials: "include",
             headers: {

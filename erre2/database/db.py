@@ -4,7 +4,9 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "postgresql://postgres:password@localhost:5432/Erre2-Dev"
+
+
+SQLALCHEMY_DATABASE_URL = os.getenv("DB_URI")
 
 DB_POOL_SIZE = 100,
 WEB_CONCURRENCY = 2,

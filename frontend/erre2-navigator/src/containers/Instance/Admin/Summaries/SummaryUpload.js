@@ -3,6 +3,7 @@ import {Button, Field, Form} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../../libs/Context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSave} from "@fortawesome/free-solid-svg-icons";
+import schema from "../../../config";
 
 
 export default function SummaryUpload(props) {
@@ -21,7 +22,7 @@ export default function SummaryUpload(props) {
             }
         ))
         formData.append("file", file)
-        let response = await fetch("http://" + instanceIp + "/summary/" + props.summary.sid, {
+        let response = await fetch(schema + instanceIp + "/summary/" + props.summary.sid, {
             method: "PATCH",
             credentials: "include",
             headers: {

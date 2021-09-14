@@ -6,6 +6,7 @@ import Style from "./Summary.module.css";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faAt, faCloudDownloadAlt, faHistory, faShare, faUser} from "@fortawesome/free-solid-svg-icons";
 import Commit from "./Commit";
+import schema from "../../config";
 
 
 export default function Summary(props) {
@@ -17,7 +18,7 @@ export default function Summary(props) {
     let history = useHistory();
 
     async function download() {
-        const response = await fetch("http://" + instanceIp + "/summary/download/" + props.summary.sid, {
+        const response = await fetch(schema + instanceIp + "/summary/download/" + props.summary.sid, {
             method: "GET",
             credentials: "include",
             headers: {
@@ -29,7 +30,7 @@ export default function Summary(props) {
         if (response.status === 200) {
             let values = await response.json()
             console.debug(values)
-            window.open("http://" + instanceIp + "/files/" + values.filename)
+            window.open(schema + instanceIp + "/files/" + values.filename)
         }
     }
 

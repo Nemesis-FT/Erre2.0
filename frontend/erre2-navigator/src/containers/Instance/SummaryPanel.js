@@ -3,6 +3,7 @@ import {useAppContext} from "../../libs/Context";
 import {useHistory} from "react-router-dom";
 import SummarySelector from "./SummarySelector";
 import Summary from "./Summary/Summary";
+import schema from "../config";
 
 
 export default function SummaryPanel() {
@@ -17,7 +18,7 @@ export default function SummaryPanel() {
     }, [courseId])
 
     async function get_summaries() {
-        const response = await fetch("http://" + instanceIp + "/summary/?course_id=" + courseId, {
+        const response = await fetch(schema + instanceIp + "/summary/?course_id=" + courseId, {
             method: "GET",
             credentials: "include",
             headers: {

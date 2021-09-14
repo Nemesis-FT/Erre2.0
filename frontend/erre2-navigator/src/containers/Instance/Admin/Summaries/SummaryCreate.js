@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {useAppContext} from "../../../../libs/Context";
 import SummaryComponent from "./SummaryComponent";
+import schema from "../../../config";
 
 
 export default function SummaryCreate(props) {
@@ -26,7 +27,7 @@ export default function SummaryCreate(props) {
             }
         ))
         formData.append("file", file)
-        let response = await fetch("http://" + instanceIp + "/summary/", {
+        let response = await fetch(schema + instanceIp + "/summary/", {
             method: "POST",
             credentials: "include",
             headers: {

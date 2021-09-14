@@ -6,7 +6,7 @@ import os
 
 
 async def get_erre2_version():
-    return "1.0.0"
+    return "2.0.2"
 
 
 async def get_auth_token(authorization: str = Header(...)):

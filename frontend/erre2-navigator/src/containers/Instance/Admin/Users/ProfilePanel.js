@@ -3,6 +3,7 @@ import {Box, Button, Form} from "@steffo/bluelib-react";
 import {useAppContext} from "../../../../libs/Context";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSave, faTrash} from "@fortawesome/free-solid-svg-icons";
+import schema from "../../../config";
 
 
 export default function ProfilePanel(props) {
@@ -17,7 +18,7 @@ export default function ProfilePanel(props) {
     const [password2, setPassword2] = useState("")
 
     async function saveElement() {
-        const response = await fetch("http://" + instanceIp + "/users/" + props.user.uid, {
+        const response = await fetch(schema + instanceIp + "/users/" + props.user.uid, {
             method: "PATCH",
             credentials: "include",
             headers: {
@@ -39,7 +40,7 @@ export default function ProfilePanel(props) {
     }
 
     async function removeElement() {
-        const response = await fetch("http://" + instanceIp + "/users/" + props.user.uid, {
+        const response = await fetch(schema + instanceIp + "/users/" + props.user.uid, {
             method: "DELETE",
             credentials: "include",
             headers: {

@@ -1,3 +1,5 @@
+import os
+
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.staticfiles import StaticFiles
 import uvicorn
@@ -21,14 +23,13 @@ app.include_router(server.router)
 app.include_router(summary.router)
 
 origins = [
-    "http://localhost.tiangolo.com",
-    "https://localhost.tiangolo.com",
-    "http://localhost",
-    "http://localhost:8080",
-    "http://localhost:3000",
-    "http://localhost:5000",
-    "https://navigator.erre2.fermitech.info"
+    "https://navigator.erre2.fermitech.info",
 ]
+
+if os.getenv("DEBUG"):
+    origins.append(
+        "http://localhost:5000",
+    )
 
 app.add_middleware(
     CORSMiddleware,
@@ -61,4 +62,4 @@ if __name__ == "__main__":
         if not db.query(models.User).filter_by(uid=1).first():
             crud.create_user(db, schemas.UserCreate(email="admin@admin.com", hash=get_hash("password"), name="admin",
                                                     surname="admin"))
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT")))

@@ -6,6 +6,7 @@ import {useHistory, useParams} from "react-router-dom";
 import SummaryPanel from "./SummaryPanel";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import schema from "../config";
 
 
 export default function Home() {
@@ -46,7 +47,7 @@ export default function Home() {
     }, [connected])
 
     async function gather_data() {
-        const response = await fetch("http://" + url + "/server/planetarium", {
+        const response = await fetch(schema + url + "/server/planetarium", {
             method: "GET",
             credentials: "include",
             headers: {

@@ -3,6 +3,7 @@ import {useAppContext} from "../../libs/Context";
 import {useHistory} from "react-router-dom";
 import Select from "react-select";
 import customStyle from "../styles/select"
+import schema from "../config";
 
 
 export default function SummarySelector(props) {
@@ -23,7 +24,7 @@ export default function SummarySelector(props) {
     }, [courseList])
 
     async function gatherData(){
-        const response = await fetch("http://" + instanceIp + "/course/", {
+        const response = await fetch(schema + instanceIp + "/course/", {
             method: "GET",
             credentials: "include",
             headers: {
