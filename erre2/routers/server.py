@@ -4,6 +4,7 @@ from erre2.authentication import get_current_user, check_admin
 from erre2.database.crud import get_server, update_server
 from sqlalchemy.orm import Session
 from erre2.database import schemas, models
+import os
 from typing import Optional
 import bcrypt
 
@@ -23,6 +24,17 @@ async def read_server(request: Request, db: Session = Depends(get_db)):
     return schemas.Server(name=s.name, university=s.university, monetization_link=s.monetization_link, motd=s.motd,
                           owner_id=s.owner_id,
                           owner=s.owner.to_schema())
+
+
+@router.get("/channel", tags=["server"], response_model=schemas.TelegramChannel)
+async def read_telegram_channel():
+    """
+    Returns the server's telegram channel
+    """
+    link = os.getenv("BOT_CHANNEL")
+    if not link:
+        link = "null"
+    return schemas.TelegramChannel(chat_id=link)
 
 
 @router.patch("/", tags=["server"], response_model=schemas.Server)

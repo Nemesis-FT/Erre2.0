@@ -16,6 +16,7 @@ export default function Home() {
     const [server, setServer] = useState(null)
     const [showInfo, setShowInfo] = useState(false)
     const [isFav, setIsFav] = useState(false)
+    const [channelLink, setChannelLink] = useState("null")
     let history = useHistory();
 
     useEffect(() => {
@@ -61,6 +62,23 @@ export default function Home() {
             console.debug(values)
             setServer(values)
             console.debug(server)
+        }
+        get_notification_channel()
+    }
+
+    async function get_notification_channel(){
+        const response = await fetch(schema + url + "/server/channel", {
+            method: "GET",
+            credentials: "include",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': process.env.DOMAIN
+            },
+        });
+        if (response.status === 200) {
+            let values = await response.json()
+            setChannelLink(values.chat_id)
         }
     }
 
@@ -134,6 +152,9 @@ export default function Home() {
                         </Chapter>
                     </Panel>
                     <Panel>
+                        {channelLink!="null" &&(
+                            <Box bluelibClassNames={"color-yellow"}>Vuoi rimanere aggiornato sui riassunti di questa istanza?<p><Anchor
+                                href={"https://t.me/"+channelLink}>Clicca qui per ricevere update su Telegram!</Anchor></p></Box>)}
                         <SummaryPanel/>
                     </Panel>
                 </div>

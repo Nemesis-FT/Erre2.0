@@ -140,6 +140,12 @@ def get_server(db: Session):
     return db.query(models.Server).first()
 
 
+def create_server(db:Session):
+    server = models.Server(name="Erre2.0", university="Ignota", monetization_link="", motd="Questo server deve ancora venire configurato.", owner_id=1)
+    db.add(server)
+    db.commit()
+
+
 def update_server(db: Session, update: schemas.Server):
     absent = False
     server: models.Server = get_server(db)

@@ -28,7 +28,7 @@ origins = [
 
 if os.getenv("DEBUG"):
     origins.append(
-        "http://localhost:5000",
+        "http://localhost:3000",
     )
 
 app.add_middleware(
@@ -62,4 +62,6 @@ if __name__ == "__main__":
         if not db.query(models.User).filter_by(uid=1).first():
             crud.create_user(db, schemas.UserCreate(email="admin@admin.com", hash=get_hash("password"), name="admin",
                                                     surname="admin"))
+        if not db.query(models.Server).first():
+            crud.create_server(db)
     uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT")))

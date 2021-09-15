@@ -107,6 +107,10 @@ class Server(BaseModel):
         orm_mode = True
 
 
+class TelegramChannel(BaseModel):
+    chat_id: str
+
+
 class Planetarium(BaseModel):
     server: Server
     version: str

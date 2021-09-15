@@ -2,10 +2,12 @@ from fastapi import APIRouter, Depends, Request, File, UploadFile, Form, HTTPExc
 from erre2.dependencies import get_auth_token, get_db, save_file
 from erre2.authentication import get_current_user, check_admin
 from erre2.database.crud import get_summaries, get_summary, create_summary, update_summary, get_summaries_course, \
-    remove_summary
+    remove_summary, get_server
 from sqlalchemy.orm import Session
 from erre2.database import schemas, models
+from erre2.integrations import telegram_send_message
 from typing import Optional
+import os
 import bcrypt
 
 router = APIRouter(
@@ -38,9 +40,22 @@ async def patch_summary(summary_id: int, update: str = Form(...), file: UploadFi
     s = get_summary(db, summary_id)
     if not s:
         raise HTTPException(404, "Not found.")
+    old_filename = s.filename
     update: schemas.SummaryUpdate = schemas.SummaryUpdate.parse_raw(update)
     filename = await save_file(file, update.summary)
     s: schemas.Summary = update_summary(db, update.summary, summary_id, update.description, file)
+    server: models.Server = get_server(db)
+    if old_filename != s.filename:
+        os.remove(os.path.join("Files", old_filename))
+    telegram_send_message("""🌐 <b>Aggiornamento su {}</b>
+{} è stato aggiornato:
+
+{}
+
+⬇️ <a href=\"{}\">Scarica</a>"""
+                          .format(server.name, s.name, update.description,
+                                  "https://navigator.erre2.fermitech.info/erre2/{}/download/{}"
+                                  .format(os.getenv("ROOT_URL"), s.sid)))
     return s
 
 
@@ -70,6 +85,7 @@ async def delete_summary(summary_id: int, db: Session = Depends(get_db),
         raise HTTPException(404, "Not found.")
     if s.author_id != current_user.uid and not check_admin(current_user):
         raise HTTPException(403, "Only the owner can delete the summary.")
+    os.remove(os.path.join("Files", s.filename))
     remove_summary(db, summary_id)
     return HTTPException(204, "Removed with success")
 
@@ -84,6 +100,14 @@ async def create_summary_(summary: str = Form(...), file: UploadFile = File(...)
     summary = schemas.Summary.parse_raw(summary)
     s: schemas.Summary = create_summary(db, summary, file)
     await save_file(file, s)
+    server: models.Server = get_server(db)
+    msg = """🌐 <b>Nuovo upload su {}</b>
+{} è stato aggiunto sulla piattaforma.
+            
+⬇️ <a href=\"{}\">Scarica</a>""".format(
+        server.name, s.name,
+        "https://navigator.erre2.fermitech.info/erre2/{}/download/{}".format(os.getenv("ROOT_URL"), s.sid))
+    telegram_send_message(msg)
     return s
 
 
