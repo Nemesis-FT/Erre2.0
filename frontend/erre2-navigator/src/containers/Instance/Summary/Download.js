@@ -41,7 +41,6 @@ export default function Download(props) {
                 <p><Anchor href={"/erre2/" + url}>Visita questa istanza di Erre2.</Anchor></p>
                 <p><Anchor href={"/"}>Torna alla home.</Anchor></p>
             </div>
-            <Image src={"logo192.png"} width={"92px"} height={"92px"}></Image>
         </div>
     );
 }

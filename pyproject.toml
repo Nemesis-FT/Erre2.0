@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "erre2"
-version = "2.0.3"
+version = "2.0.4.1"
 description = "A new and improved version of Erre2."
 authors = ["Lorenzo Balugani <lorenzo.balugani@gmail.com>"]
 

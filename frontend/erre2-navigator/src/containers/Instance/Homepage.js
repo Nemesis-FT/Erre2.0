@@ -152,10 +152,10 @@ export default function Home() {
                         </Chapter>
                     </Panel>
                     <Panel>
+                        <SummaryPanel/>
                         {channelLink!="null" &&(
                             <Box bluelibClassNames={"color-yellow"}>Vuoi rimanere aggiornato sui riassunti di questa istanza?<p><Anchor
                                 href={"https://t.me/"+channelLink}>Clicca qui per ricevere update su Telegram!</Anchor></p></Box>)}
-                        <SummaryPanel/>
                     </Panel>
                 </div>
 

@@ -63,7 +63,7 @@ async def update_user_(user: schemas.UserCreatePlain, user_id: int, db: Session 
     Allows user update
     """
     server: Server = get_server(db)
-    if user_id != current_user.uid or server.owner_id != user_id:
+    if user_id != current_user.uid and server.owner_id != current_user.uid:
         raise HTTPException(status_code=403, detail="You cannot edit other users.")
     h = bcrypt.hashpw(bytes(user.password, encoding="utf-8"), bcrypt.gensalt())
     if user.password == " ":
