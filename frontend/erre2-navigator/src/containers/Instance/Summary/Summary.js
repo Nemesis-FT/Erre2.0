@@ -35,10 +35,7 @@ export default function Summary(props) {
     }
 
     async function share(){
-        await navigator.share({title:"Erre2-Navigator", text:`
-        ${props.summary.name} di ${props.summary.author.name} ${props.summary.author.surname} su un'istanza privata di 
-        Erre2, la piattaforma distribuita per la condivisione di appunti.
-        `, url:"https://navigator.erre2.fermitech.info/erre2/" + instanceIp + "/download/" + props.summary.sid})
+        await navigator.share({title:"Erre2-Navigator", text:`${props.summary.name} di ${props.summary.author.name} ${props.summary.author.surname}\n su un'istanza privata di Erre2, la piattaforma distribuita per la condivisione di appunti.`, url:"https://navigator.erre2.fermitech.info/erre2/" + instanceIp + "/download/" + props.summary.sid})
     }
 
 
