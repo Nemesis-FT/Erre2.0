@@ -6,6 +6,8 @@ import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from datetime import timedelta
 
+from starlette.responses import RedirectResponse
+
 from erre2.routers import users, course, server, summary
 from erre2.database import crud, schemas, models
 from erre2.dependencies import get_db
@@ -43,8 +45,7 @@ app.mount("/files", StaticFiles(directory="Files"), name="files")
 
 @app.get("/")
 async def root():
-    return {
-        "message": "This is the backend of Erre2.0. If you see this page, it means that the server is alive and well."}
+    return RedirectResponse("https://navigator.erre2.fermitech.info/erre2/{}/".format(os.getenv("ROOT_URL")))
 
 
 @app.post("/token", response_model=Token)
