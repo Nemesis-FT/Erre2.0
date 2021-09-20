@@ -136,9 +136,6 @@ export default function Home() {
                             ) : (
                                 <div></div>
                             )}
-                            <Box>Vuoi supportare le persone che contribuiscono a questa istanza? <p><Anchor
-                                href={server.server.monetization_link}>Perchè
-                                non gli offri un caffè?</Anchor></p></Box>
                         </Panel>
                     </div>
                     <Panel>
