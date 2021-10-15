@@ -24,8 +24,7 @@ function App() {
     }
 
     return (
-        <Bluelib theme={"sophon"} backgroundColor={"#272121"} accentColor={"#F6E9E9"} foregroundColor={"#e1500b"}
-        linkColor={"#E0C097"} brokenColor={"#E0C097"} visitedColor={"#E0C097"} downloadColor={"#E0C097"} redColor={"#E05D5D"} yellowColor={"#E0C097"}>
+        <Bluelib theme={"amber"}>
             <div className="App">
                 <AppContext.Provider value={{instanceIp, setInstanceIp, connected, setConnected, token, setToken}}>
                     <Routes/>
@@ -35,7 +34,7 @@ function App() {
             </div>
             <div className="Fermitech-Footer">
                 <Footer>Erre2, Erre2.0, Erre2-Navigator sono software di Fermitech Softworks.
-                <p>Erre2-Navigator usa BlueLib di Stefano Pigozzi.</p>
+                <p>Erre2-Navigator usa <a href={"https://github.com/Steffo99/bluelib-react"}>bluelib-react</a> di Steffo.</p>
                 <p>Fermitech-Softworks non si assume alcuna responsabilità per i contenuti
                 caricati su istanze private.</p></Footer>
             </div>
