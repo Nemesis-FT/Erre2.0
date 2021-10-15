@@ -151,7 +151,7 @@ export default function Home() {
                     <Panel>
                         <SummaryPanel/>
                         {channelLink!="null" &&(
-                            <Box bluelibClassNames={"color-yellow"}>Vuoi rimanere aggiornato sui riassunti di questa istanza?<p><Anchor
+                            <Box customColor={"#E0C097"}>Vuoi rimanere aggiornato sui riassunti di questa istanza?<p><Anchor
                                 href={"https://t.me/"+channelLink}>Clicca qui per ricevere update su Telegram!</Anchor></p></Box>)}
                     </Panel>
                 </div>

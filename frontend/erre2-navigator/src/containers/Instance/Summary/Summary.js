@@ -53,22 +53,22 @@ export default function Summary(props) {
                 <Chapter>
                     <div><Button onClick={(e) => {
                         download()
-                    }} bluelibClassNames={"color-yellow"}><FontAwesomeIcon icon={faCloudDownloadAlt}
+                    }} customColor={"#E0C097"}><FontAwesomeIcon icon={faCloudDownloadAlt}
                                                                            label={"Download"}/></Button></div>
                     <div><Button onClick={(e) => {
                         share()
-                    }} bluelibClassNames={"color-yellow"}><FontAwesomeIcon icon={faShare}
+                    }} customColor={"#E0C097"}><FontAwesomeIcon icon={faShare}
                                                                            label={"Condividi"}/></Button></div>
                     <div>
 
                         <Button onClick={(e) => {
                             setShowAuthor(!showAuthor)
-                        }} bluelibClassNames={"color-yellow"}><FontAwesomeIcon icon={faUser} label={"Autore"}/></Button>
+                        }} customColor={"#E0C097"}><FontAwesomeIcon icon={faUser} label={"Autore"}/></Button>
                     </div>
                     <div>
                         <Button onClick={(e) => {
                             setShowHistory(!showHistory)
-                        }} bluelibClassNames={"color-yellow"}><FontAwesomeIcon icon={faHistory}
+                        }} customColor={"#E0C097"}><FontAwesomeIcon icon={faHistory}
                                                                                label={"Changelog"}/></Button>
                     </div>
                 </Chapter>
