@@ -34,7 +34,7 @@ function App() {
             </div>
             <div className="Fermitech-Footer">
                 <Footer>Erre2, Erre2.0, Erre2-Navigator sono software di Fermitech Softworks.
-                <p>Erre2-Navigator usa BlueLib di Stefano Pigozzi.</p>
+                <p>Erre2-Navigator usa <a href={"https://github.com/Steffo99/bluelib-react"}>bluelib-react</a> di Steffo.</p>
                 <p>Fermitech-Softworks non si assume alcuna responsabilità per i contenuti
                 caricati su istanze private.</p></Footer>
             </div>
