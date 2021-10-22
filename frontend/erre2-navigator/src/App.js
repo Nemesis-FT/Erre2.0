@@ -26,7 +26,6 @@ function App() {
     return (
 
         <Bluelib theme={"amber"}>
-            <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <div className="App">
                 <AppContext.Provider value={{instanceIp, setInstanceIp, connected, setConnected, token, setToken}}>
                     <Routes/>
