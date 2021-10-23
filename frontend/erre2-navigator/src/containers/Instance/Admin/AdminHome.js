@@ -12,9 +12,11 @@ import schema from "../../config";
 
 
 export default function Login() {
-    const {instanceIp, setInstanceIp} = useAppContext()
-    const {connected, setConnected} = useAppContext()
-    const {token, setToken} = useAppContext()
+    const {
+        instanceIp, setInstanceIp,
+        connected, setConnected,
+        token, setToken,
+    } = useAppContext()
     const [courses, setCourses] = useState([])
     const [summaries, setSummaries] = useState([])
     const [user, setUser] = useState(null)
