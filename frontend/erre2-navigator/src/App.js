@@ -11,12 +11,10 @@ function App() {
     const [token, setToken] = useState("")
     let history = useHistory();
 
-    useEffect(() => {
-        onLoad();
-    }, [history]);
+    useEffect(() => onLoad(), [onLoad]);
 
     function onLoad() {
-        if (localStorage.getItem("instanceIp" && history)) {
+        if (localStorage.getItem("instanceIp") && history) {
             setInstanceIp(localStorage.getItem("instanceIp"))
             setConnected(true)
             history.push("/erre2/" + instanceIp)
@@ -26,7 +24,6 @@ function App() {
     return (
 
         <Bluelib theme={"amber"}>
-            <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <div className="App">
                 <AppContext.Provider value={{instanceIp, setInstanceIp, connected, setConnected, token, setToken}}>
                     <Routes/>
