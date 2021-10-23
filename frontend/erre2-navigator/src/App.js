@@ -14,7 +14,7 @@ function App() {
     useEffect(() => onLoad(), [onLoad]);
 
     function onLoad() {
-        if (localStorage.getItem("instanceIp" && history)) {
+        if (localStorage.getItem("instanceIp") && history) {
             setInstanceIp(localStorage.getItem("instanceIp"))
             setConnected(true)
             history.push("/erre2/" + instanceIp)
