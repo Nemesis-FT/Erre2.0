@@ -13,7 +13,7 @@ function App() {
 
     useEffect(() => {
         onLoad();
-    }, [history]);
+    }, [onLoad]);
 
     function onLoad() {
         if (localStorage.getItem("instanceIp" && history)) {
