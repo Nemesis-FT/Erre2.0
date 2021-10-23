@@ -11,9 +11,7 @@ function App() {
     const [token, setToken] = useState("")
     let history = useHistory();
 
-    useEffect(() => {
-        onLoad();
-    }, [onLoad]);
+    useEffect(() => onLoad(), [onLoad]);
 
     function onLoad() {
         if (localStorage.getItem("instanceIp" && history)) {
