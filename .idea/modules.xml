@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Erre2.1.iml" filepath="$PROJECT_DIR$/.idea/Erre2.1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/backend/backend.iml" filepath="$PROJECT_DIR$/backend/backend.iml" />
-      <module fileurl="file://$PROJECT_DIR$/frontend/frontend.iml" filepath="$PROJECT_DIR$/frontend/frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/backend/Backend.iml" filepath="$PROJECT_DIR$/backend/Backend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/frontend/Frontend.iml" filepath="$PROJECT_DIR$/frontend/Frontend.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Root.iml" filepath="$PROJECT_DIR$/.idea/Root.iml" />
     </modules>
   </component>
 </project>
