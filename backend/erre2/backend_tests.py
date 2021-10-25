@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
-from erre2.main import app
+
+from erre2.__main__ import app
 
 client = TestClient(app)
 

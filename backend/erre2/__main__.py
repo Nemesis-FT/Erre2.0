@@ -1,19 +1,16 @@
 import os
 
-from fastapi import Depends, FastAPI, HTTPException, status
-from fastapi.staticfiles import StaticFiles
 import uvicorn
+from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from datetime import timedelta
-
+from fastapi.staticfiles import StaticFiles
+from fastapi.security import OAuth2PasswordRequestForm
 from starlette.responses import RedirectResponse
 
-from erre2.routers import users, course, server, summary
+from erre2.authentication import Token, authenticate_user, create_token, get_hash
 from erre2.database import crud, schemas, models
-from erre2.dependencies import get_db
 from erre2.database.db import engine, SessionLocal
-from erre2.authentication import Token, OAuth2PasswordRequestForm, authenticate_user, ACCESS_TOKEN_EXPIRE_MINUTES, \
-    create_token, get_hash
+from erre2.routers import users, course, server, summary
 
 models.Base.metadata.create_all(bind=engine)
 

@@ -1,5 +1,6 @@
-import requests
 import os
+
+import requests
 
 
 def telegram_send_message(message):

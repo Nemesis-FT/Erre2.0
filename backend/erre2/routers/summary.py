@@ -1,14 +1,15 @@
+import os
+from typing import Optional
+
 from fastapi import APIRouter, Depends, Request, File, UploadFile, Form, HTTPException
-from erre2.dependencies import get_auth_token, get_db, save_file
+from sqlalchemy.orm import Session
+
 from erre2.authentication import get_current_user, check_admin
+from erre2.database import schemas, models
 from erre2.database.crud import get_summaries, get_summary, create_summary, update_summary, get_summaries_course, \
     remove_summary, get_server
-from sqlalchemy.orm import Session
-from erre2.database import schemas, models
+from erre2.dependencies import get_db, save_file
 from erre2.integrations import telegram_send_message
-from typing import Optional
-import os
-import bcrypt
 
 router = APIRouter(
     prefix="/summary",

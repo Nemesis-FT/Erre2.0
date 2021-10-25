@@ -1,8 +1,10 @@
-from fastapi import Header, HTTPException, UploadFile
-from contextlib import contextmanager
-from erre2.database.db import SessionLocal
-import aiofiles
 import os
+from contextlib import contextmanager
+
+import aiofiles
+from fastapi import Header, HTTPException, UploadFile
+
+from erre2.database.db import SessionLocal
 
 
 async def get_erre2_version():

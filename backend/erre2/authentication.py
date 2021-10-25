@@ -1,18 +1,18 @@
-from jose import JWTError, jwt
-from pydantic import BaseModel
-from typing import Optional
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from fastapi import Depends, HTTPException, status
-import bcrypt
-from erre2.database import models
-from sqlalchemy.orm import Session
-from erre2.dependencies import get_db, SessionLocal
-from erre2.database.crud import get_user_by_email, get_server
 from datetime import datetime, timedelta
+from typing import Optional
+from os import environ
+
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError, jwt
 from passlib.context import CryptContext
+from pydantic import BaseModel
+
+from erre2.database import models
+from erre2.database.crud import get_user_by_email, get_server
 from erre2.database.db import SessionLocal
 
-SECRET_KEY = "supersecret"
+SECRET_KEY = environ["JWT_KEY"]
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 120
 
@@ -81,6 +81,3 @@ def check_admin(user):
         if server.owner_id!=user.uid:
             return False
         return True
-
-
-
