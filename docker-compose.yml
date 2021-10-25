@@ -1,0 +1,35 @@
+# Example Docker Compose for Erre2
+# Doesn't include frontend
+
+version: "2"
+
+volumes:
+  db-data:
+  erredue-files:
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: "erredue"
+      POSTGRES_PASSWORD: "erredue"
+      POSTGRES_DB: "erredue"
+    volumes:
+      - "db-data:/var/lib/postgresql/data"
+  backend:
+    image: "ghcr.io/lbindustries/erre2.0:latest"
+    environment:
+      # INSTALL: Change these as needed.
+      ROOT_URL: "erre2next.fermitech.info"
+      BOT_KEY: "bot123456789:SECRET"
+      BOT_CHANNEL: "ChannelUsername"
+      JWT_KEY: "type random characters here"
+      # Don't touch these.
+      DB_URI: "postgresql://erredue:erredue@db/erredue"
+      PORT: 80
+    ports:
+      - "8080:80"
+    volumes:
+      - "erredue-files:/usr/src/app/Files"
+    depends_on:
+      - db
