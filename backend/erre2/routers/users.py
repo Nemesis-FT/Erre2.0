@@ -1,13 +1,14 @@
-from fastapi import APIRouter, Depends, Request, HTTPException
-
-from erre2.database.models import Server
-from erre2.dependencies import get_auth_token, get_db
-from erre2.authentication import get_current_user, check_admin
-from erre2.database.crud import get_users, create_user, get_user, update_user, get_server
-from sqlalchemy.orm import Session
-from erre2.database import schemas, models
 from typing import Optional
+
 import bcrypt
+from fastapi import APIRouter, Depends, Request, HTTPException
+from sqlalchemy.orm import Session
+
+from erre2.authentication import get_current_user, check_admin
+from erre2.database import schemas, models
+from erre2.database.crud import get_users, create_user, get_user, update_user, get_server
+from erre2.database.models import Server
+from erre2.dependencies import get_db
 
 router = APIRouter(
     prefix="/users",

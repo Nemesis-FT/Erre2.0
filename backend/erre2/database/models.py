@@ -1,10 +1,10 @@
 from sqlalchemy import Integer, String, LargeBinary, Column, Boolean, ForeignKey, SmallInteger, DateTime
 from sqlalchemy.orm import relationship
-from erre2.database.schemas import User as UserSchema
-from erre2.database.schemas import Course as CourseSchema
-from erre2.database.schemas import Commit as CommitSchema
 
 from erre2.database.db import Base
+from erre2.database.schemas import Commit as CommitSchema
+from erre2.database.schemas import Course as CourseSchema
+from erre2.database.schemas import User as UserSchema
 
 
 class User(Base):

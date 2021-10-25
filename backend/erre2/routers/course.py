@@ -1,11 +1,12 @@
-from fastapi import APIRouter, Depends, Request
-from erre2.dependencies import get_auth_token, get_db
-from erre2.authentication import get_current_user
-from erre2.database.crud import get_course, get_courses, create_course, update_course
-from sqlalchemy.orm import Session
-from erre2.database import schemas, models
 from typing import Optional
-import bcrypt
+
+from fastapi import APIRouter, Depends, Request
+from sqlalchemy.orm import Session
+
+from erre2.authentication import get_current_user
+from erre2.database import schemas, models
+from erre2.database.crud import get_course, get_courses, create_course, update_course
+from erre2.dependencies import get_db
 
 router = APIRouter(
     prefix="/course",
