@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from typing import Optional
+from os import environ
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
@@ -11,7 +12,7 @@ from erre2.database import models
 from erre2.database.crud import get_user_by_email, get_server
 from erre2.database.db import SessionLocal
 
-SECRET_KEY = "supersecret"
+SECRET_KEY = environ["JWT_KEY"]
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 120
 
