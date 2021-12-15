@@ -3,7 +3,7 @@ import './App.css';
 import {AppContext} from "./libs/Context"
 import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
-import {Bluelib, Footer} from "@steffo/bluelib-react";
+import {Bluelib, Footer, LayoutThreeCol} from "@steffo/bluelib-react";
 
 function App() {
     const [instanceIp, setInstanceIp] = useState("");
@@ -24,13 +24,18 @@ function App() {
     return (
 
         <Bluelib theme={"amber"}>
+            <LayoutThreeCol>
+                <LayoutThreeCol.Center>
             <div className="App">
                 <AppContext.Provider value={{instanceIp, setInstanceIp, connected, setConnected, token, setToken}}>
                     <Routes/>
 
 
                 </AppContext.Provider>
+
             </div>
+                </LayoutThreeCol.Center>
+            </LayoutThreeCol>
             <div className="Fermitech-Footer">
                 <Footer>Erre2, Erre2.0, Erre2-Navigator sono software di Fermitech Softworks.
                 <p>Erre2-Navigator usa <a href={"https://github.com/Steffo99/bluelib-react"}>bluelib-react</a> di Steffo.</p>

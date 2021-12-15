@@ -2,6 +2,7 @@ import React from "react";
 import {Anchor, Button, Chapter, Panel} from "@steffo/bluelib-react";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
+import Style from "./ServerSelector.module.css"
 
 export default function ServerFav(props) {
 
@@ -15,11 +16,13 @@ export default function ServerFav(props) {
     }
 
     return (
-        <Panel>
-            <Chapter>
+        <Panel style={{minWidth: "unset"}}>
+
                 <div><Anchor href={"/erre2/" + props.fav.address}>{props.fav.name}</Anchor><br/>({props.fav.university})</div>
-                <Button onClick={e => remove()}><FontAwesomeIcon icon={faTrash}/></Button>
-            </Chapter>
+            <div>
+                <Button onClick={e => remove()} className={Style.ButtonFix}><FontAwesomeIcon icon={faTrash}/></Button>
+            </div>
+
         </Panel>
     );
 }

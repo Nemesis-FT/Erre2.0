@@ -80,7 +80,7 @@ export default function ServerSelector() {
 
     return (
         <div>
-            <Box>
+            <Box style={{minWidth: "unset"}}>
 
                 <Form>
                     <Form.Row>
@@ -93,12 +93,12 @@ export default function ServerSelector() {
                     {isChecking ? (
                         <div>Verifica in corso...</div>
                     ) : (
-                        <div></div>
+                        <br/>
                     )}
 
                     {isValid ? (
                         <div>
-                            <Dialog bluelibClassNames={"color-lime"}>
+                            <Dialog bluelibClassNames={"color-lime"} style={{minWidth: "unset"}}>
                                 {server.name} ({server.university})
                                 <p> {server.type} v. {server.version} </p>
                             </Dialog>
@@ -127,7 +127,7 @@ export default function ServerSelector() {
                     ufficiale di
                     Erre2, e questa sarà raggiungibile dal servizio "Planetario".</p>)}
 
-            <Box className={Style.Scrollable}>
+            <Box className={Style.Scrollable} style={{minWidth: "unset"}}>
                 {favList ? (
                     <div>{favList.map(fav => <ServerFav fav={fav} setFav={setFavList} favList={favList}/>)}</div>
                 ) : (

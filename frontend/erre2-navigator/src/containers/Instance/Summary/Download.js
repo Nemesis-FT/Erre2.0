@@ -1,8 +1,8 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Style from "../Homepage.module.css";
 import {
     Anchor,
-    Heading, Image,
+    Heading, Image, Button
 } from "@steffo/bluelib-react";
 import {useParams} from "react-router-dom";
 import schema from "../../config";
@@ -11,6 +11,7 @@ import schema from "../../config";
 export default function Download(props) {
     const {url} = useParams();
     const {sid} = useParams();
+    const [filename, setFilename] = useState(null)
 
     useEffect(e => (
         download()
@@ -29,7 +30,13 @@ export default function Download(props) {
         if (response.status === 200) {
             let values = await response.json()
             console.debug(values)
-            window.open(schema + url + "/files/" + values.filename)
+            setFilename(values.filename)
+            let win = window.open(schema + url + "/files/" + values.filename)
+            if(!win || win.closed || typeof win.closed=='undefined')
+            {
+                alert("Il tuo dispositivo sta bloccando i popup. Per usare al meglio Erre2, disattiva questa opzione.")
+                window.location.href=schema + url + "/files/" + values.filename
+            }
         }
     }
 

@@ -13,6 +13,6 @@ export default function Summary(props) {
 
     return (
 
-        <Panel><p>{date}</p>{props.commit.description}</Panel>
+        <Panel style={{minWidth: "unset"}}><p>{date}</p>{props.commit.description}</Panel>
     );
 }

@@ -140,18 +140,14 @@ export default function Home() {
                     </div>
                     <Panel>
                         <Chapter>
-                            <div>
                                 <Button children={"Accedi"} onClick={e => history.push("/login")}></Button>
-                            </div>
-                            <div>
-                                <Button children={"Disconnettiti"} onClick={e => disconnect()}></Button>
-                            </div>
+                                <Button children={"Esci"} onClick={e => disconnect()}></Button>
                         </Chapter>
                     </Panel>
                     <Panel>
                         <SummaryPanel/>
                         {channelLink!="null" &&(
-                            <Box customColor={"#E0C097"}>Vuoi rimanere aggiornato sui riassunti di questa istanza?<p><Anchor
+                            <Box customColor={"#E0C097"} style={{minWidth: "unset"}}>Vuoi rimanere aggiornato sui riassunti di questa istanza?<p><Anchor
                                 href={"https://t.me/"+channelLink}>Clicca qui per ricevere update su Telegram!</Anchor></p></Box>)}
                     </Panel>
                 </div>

@@ -30,7 +30,12 @@ export default function Summary(props) {
         if (response.status === 200) {
             let values = await response.json()
             console.debug(values)
-            window.open(schema + instanceIp + "/files/" + values.filename)
+            let win = window.open(schema + instanceIp + "/files/" + values.filename)
+            if(!win || win.closed || typeof win.closed=='undefined')
+            {
+                alert("Il tuo dispositivo sta bloccando i popup. Per usare al meglio Erre2, disattiva questa opzione.")
+                window.location.href=schema + instanceIp + "/files/" + values.filename
+            }
         }
     }
 
@@ -41,12 +46,12 @@ export default function Summary(props) {
 
     return (
         <div>
-            <Box>
+            <Box style={{minWidth: "unset"}}>
                 <Chapter>
-                    <Panel>
+                    <Panel style={{minWidth: "unset"}}>
                         {props.summary.name}
                     </Panel>
-                    <Panel>
+                    <Panel style={{minWidth: "unset"}}>
                         {props.summary.downloads} <FontAwesomeIcon icon={faCloudDownloadAlt}/>
                     </Panel>
                 </Chapter>
@@ -74,7 +79,7 @@ export default function Summary(props) {
                 </Chapter>
                 <div className={Style.Animated}>
                     {showAuthor ? (
-                        <Panel>
+                        <Panel style={{minWidth: "unset"}}>
                             <Heading level={4}>Informazioni sull'autore</Heading>
                             <p>
                                 {props.summary.author.name} {props.summary.author.surname} <Anchor
@@ -86,7 +91,7 @@ export default function Summary(props) {
                         <div></div>
                     )}
                     {showHistory ? (
-                        <Panel>
+                        <Panel style={{minWidth: "unset"}}>
                             <Heading level={4}>Changelog</Heading>
                             <div className={Style.Scrollable}>
                                 {props.summary.commits.map(commit => <Commit commit={commit}/>)}
