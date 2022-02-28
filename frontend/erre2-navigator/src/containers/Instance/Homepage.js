@@ -128,7 +128,7 @@ export default function Home() {
                                     <p>
                                         "{server.server.motd}"
                                     </p>
-                                    I riassunti su questa istanza sono pubblicati
+                                    I documenti su questa istanza sono pubblicati
                                     da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC
                                     BY-SA
                                     4.0.
@@ -147,7 +147,7 @@ export default function Home() {
                     <Panel>
                         <SummaryPanel/>
                         {channelLink!="null" &&(
-                            <Box customColor={"#E0C097"} style={{minWidth: "unset"}}>Vuoi rimanere aggiornato sui riassunti di questa istanza?<p><Anchor
+                            <Box customColor={"#E0C097"} style={{minWidth: "unset"}}>Vuoi rimanere aggiornato sui documenti di questa istanza?<p><Anchor
                                 href={"https://t.me/"+channelLink}>Clicca qui per ricevere update su Telegram!</Anchor></p></Box>)}
                     </Panel>
                 </div>
