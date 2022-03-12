@@ -2,6 +2,13 @@ body {
   margin: 0;
   min-height: 100vh;
   background-color: #272121;
+
+  --bluelib-text-family: "Fira Sans", sans-serif !important;
+  --bluelib-text-weight: 400 !important;
+  --bluelib-title-family: "Fira Sans", sans-serif !important;
+  --bluelib-title-weight: 600 !important;
+  --bluelib-code-family: "Fira Code", monospace !important;
+  --bluelib-code-weight: 400 !important;
 }
 
 body > * {
