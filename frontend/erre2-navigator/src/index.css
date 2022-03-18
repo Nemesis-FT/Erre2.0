@@ -10,11 +10,3 @@ body {
   --bluelib-code-family: "Fira Code", monospace !important;
   --bluelib-code-weight: 400 !important;
 }
-
-body > * {
-  min-height: 100vh;
-}
-
-body > * > * {
-  min-height: 100vh;
-}
