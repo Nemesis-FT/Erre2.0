@@ -10,6 +10,7 @@ from erre2.database.crud import get_summaries, get_summary, create_summary, upda
     remove_summary, get_server
 from erre2.dependencies import get_db, save_file
 from erre2.integrations import telegram_send_message
+from erre2.configuration import ROOT_URL
 
 router = APIRouter(
     prefix="/summary",
@@ -48,15 +49,12 @@ async def patch_summary(summary_id: int, update: str = Form(...), file: UploadFi
     server: models.Server = get_server(db)
     if old_filename != s.filename:
         os.remove(os.path.join("Files", old_filename))
-    telegram_send_message("""🌐 <b>Aggiornamento su {}</b>
-{} è stato aggiornato:
+    telegram_send_message(f"""🌐 <b>Aggiornamento su {server.name}</b>
+{s.name} è stato aggiornato:
 
-{}
+{update.description}
 
-⬇️ <a href=\"{}\">Scarica</a>"""
-                          .format(server.name, s.name, update.description,
-                                  "https://navigator.erre2.fermitech.info/erre2/{}/download/{}"
-                                  .format(os.getenv("ROOT_URL"), s.sid)))
+⬇️ <a href="https://navigator.erre2.fermitech.info/erre2/{ROOT_URL}/download/{s.sid}">Scarica</a>""")
     return s
 
 
@@ -102,12 +100,10 @@ async def create_summary_(summary: str = Form(...), file: UploadFile = File(...)
     s: schemas.Summary = create_summary(db, summary, file)
     await save_file(file, s)
     server: models.Server = get_server(db)
-    msg = """🌐 <b>Nuovo upload su {}</b>
-{} è stato aggiunto sulla piattaforma.
+    msg = f"""🌐 <b>Nuovo upload su {server.name}</b>
+{s.name} è stato aggiunto sulla piattaforma.
             
-⬇️ <a href=\"{}\">Scarica</a>""".format(
-        server.name, s.name,
-        "https://navigator.erre2.fermitech.info/erre2/{}/download/{}".format(os.getenv("ROOT_URL"), s.sid))
+⬇️ <a href="https://navigator.erre2.fermitech.info/erre2/{ROOT_URL}/download/{s.sid}">Scarica</a>"""
     telegram_send_message(msg)
     return s
 
