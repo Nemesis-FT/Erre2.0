@@ -36,7 +36,7 @@ def setting_required(name) -> str:
         log.debug(f"Setting {name} is set via filename at {setting_filename}")
         with open(setting_filename) as file:
             setting = file.read().strip()
-    elif setting := os.environ.get("BOT_KEY"):
+    elif setting := os.environ.get(f"{name}"):
         log.debug(f"Setting {name} is set via environment variable")
     else:
         raise MissingSettingError(name)
