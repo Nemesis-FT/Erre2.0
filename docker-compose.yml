@@ -4,8 +4,8 @@
 version: "2"
 
 volumes:
-  db-data:
-  erredue-files:
+  db:
+  files:
 
 services:
   db:
@@ -15,7 +15,7 @@ services:
       POSTGRES_PASSWORD: "erredue"
       POSTGRES_DB: "erredue"
     volumes:
-      - "db-data:/var/lib/postgresql/data"
+      - "db:/var/lib/postgresql/data"
     restart: always
   backend:
     image: "ghcr.io/lbindustries/erre2.0:latest"
@@ -35,7 +35,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - "erredue-files:/usr/src/app/Files"
+      - "files:/usr/src/app/Files"
     depends_on:
       - db
     restart: always
