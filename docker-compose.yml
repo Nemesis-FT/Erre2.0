@@ -4,8 +4,8 @@
 version: "2"
 
 volumes:
-  db-data:
-  erredue-files:
+  db:
+  files:
 
 services:
   db:
@@ -15,21 +15,27 @@ services:
       POSTGRES_PASSWORD: "erredue"
       POSTGRES_DB: "erredue"
     volumes:
-      - "db-data:/var/lib/postgresql/data"
+      - "db:/var/lib/postgresql/data"
+    restart: always
   backend:
     image: "ghcr.io/lbindustries/erre2.0:latest"
     environment:
-      # INSTALL: Change these as needed.
+      # Change these as needed.
       ROOT_URL: "erre2next.fermitech.info"
-      BOT_KEY: "bot123456789:SECRET"
       BOT_CHANNEL: "ChannelUsername"
-      JWT_KEY: "type random characters here"
+      # Set these to the appropriate Docker secrets
+      JWT_KEY_FILENAME: "/run/secrets/erre2_jwt_key"
+      BOT_KEY_FILENAME: "/run/secrets/erre2_bot_key"
       # Don't touch these.
       DB_URI: "postgresql://erredue:erredue@db/erredue"
-      PORT: 80
+    secrets:
+      # Set these to the appropriate Docker secrets
+      - "erre2_jwt_key"
+      - "erre2_bot_key"
     ports:
       - "8080:80"
     volumes:
-      - "erredue-files:/usr/src/app/Files"
+      - "files:/usr/src/app/Files"
     depends_on:
       - db
+    restart: always

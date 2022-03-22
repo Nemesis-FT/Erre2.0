@@ -1,4 +1,5 @@
 import os
+from erre2.configuration import BOT_CHANNEL
 
 from fastapi import APIRouter, Depends, Request, HTTPException
 from sqlalchemy.orm import Session
@@ -31,10 +32,7 @@ async def read_telegram_channel():
     """
     Returns the server's telegram channel
     """
-    link = os.getenv("BOT_CHANNEL")
-    if not link:
-        link = "null"
-    return schemas.TelegramChannel(chat_id=link)
+    return schemas.TelegramChannel(chat_id=BOT_CHANNEL or "null")
 
 
 @router.patch("/", tags=["server"], response_model=schemas.Server)
