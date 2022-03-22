@@ -60,6 +60,10 @@ ROOT_URL = setting_required("ROOT_URL")
 JWT_KEY = setting_required("JWT_KEY")
 DB_URI = setting_required("DB_URI")
 
+# Also required, but not set here:
+# BIND_IP
+# BIND_PORT
+
 # Optional settings
 BOT_KEY = setting_optional("BOT_KEY")
 BOT_CHANNEL = setting_optional("BOT_CHANNEL")
