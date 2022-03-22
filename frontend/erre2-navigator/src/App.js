@@ -5,6 +5,7 @@ import React, {useEffect, useState} from "react";
 import {useHistory} from "react-router-dom";
 import {Bluelib, Footer, LayoutThreeCol, useBluelibInBody} from "@steffo/bluelib-react";
 
+
 function App() {
     const [instanceIp, setInstanceIp] = useState("");
     const [connected, setConnected] = useState(false);
