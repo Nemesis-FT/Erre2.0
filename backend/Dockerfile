@@ -21,4 +21,4 @@ ENV "BIND_PORT" "80"
 FROM env AS run
 WORKDIR /usr/src/erre2
 ENTRYPOINT ["poetry", "run"]
-CMD ["python", "-m", "erre2"]
+CMD ["python", "-O", "-m", "erre2"]
