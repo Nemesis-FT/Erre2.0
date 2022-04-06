@@ -118,30 +118,19 @@ export default function Home() {
                             {!isFav ? (<FontAwesomeIcon
                                 icon={faStar} onClick={e => addFav()}/>) : (<div/>)}
                         </Heading>
-                        <p className="text-muted">{server.server.university}</p>
+                        <p>{server.server.university}</p>
                         <Panel>
-                            <Button onClick={(e) => {
-                                setShowInfo(!showInfo)
-                            }}>Informazioni sul server</Button>
-                            {showInfo ? (
-                                <Panel>
-                                    <p>
-                                        "{server.server.motd}"
-                                    </p>
-                                    I riassunti su questa istanza sono pubblicati
-                                    da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC
-                                    BY-SA
-                                    4.0.
-                                </Panel>
-                            ) : (
-                                <div></div>
-                            )}
+                            <p>
+                                "{server.server.motd}"
+                            </p>
+                            I riassunti su questa istanza sono pubblicati
+                            da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC BY-SA 4.0.
                         </Panel>
                     </div>
                     <Panel>
                         <Chapter>
-                                <Button children={"Accedi"} onClick={e => history.push("/login")}></Button>
-                                <Button children={"Esci"} onClick={e => disconnect()}></Button>
+                                <Button children={"Accedi"} onClick={e => history.push("/login")}/>
+                                <Button children={"Esci"} onClick={e => disconnect()}/>
                         </Chapter>
                     </Panel>
                     <Panel>
