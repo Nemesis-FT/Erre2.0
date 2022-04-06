@@ -66,7 +66,7 @@ export default function Home() {
         get_notification_channel()
     }
 
-    async function get_notification_channel(){
+    async function get_notification_channel() {
         const response = await fetch(schema + url + "/server/channel", {
             method: "GET",
             credentials: "include",
@@ -120,28 +120,33 @@ export default function Home() {
                         </Heading>
                         <p>{server.server.university}</p>
                         <Panel>
-                                "{server.server.motd}"
+                            "{server.server.motd}"
                         </Panel>
                     </div>
                     <Panel>
                         <Chapter>
-                                <Button children={"Accedi"} onClick={e => history.push("/login")}></Button>
-                                <Button children={"Esci"} onClick={e => disconnect()}></Button>
+                            <Button children={"Accedi"} onClick={e => history.push("/login")}></Button>
+                            <Button children={"Esci"} onClick={e => disconnect()}></Button>
                         </Chapter>
                     </Panel>
                     <Panel>
                         <SummaryPanel/>
-                        {channelLink!="null" &&(
-                            <Box customColor={"#E0C097"} style={{minWidth: "unset"}}>Vuoi rimanere aggiornato sui documenti di questa istanza?<p><Anchor
-                                href={"https://t.me/"+channelLink}>Clicca qui per ricevere update su Telegram!</Anchor></p></Box>)}
+                        {channelLink != "null" && (
+                            <Box customColor={"#E0C097"} style={{minWidth: "unset"}}>Vuoi rimanere aggiornato sui
+                                documenti di questa istanza?<p><Anchor
+                                    href={"https://t.me/" + channelLink}>Clicca qui per ricevere update su
+                                    Telegram!</Anchor></p></Box>)}
                     </Panel>
-                    <Footer> Gli appunti presenti su questo sito non sono pubblicati da un membro del corpo docente
-                        di {server.server.university},
-                        e non sostituiscono nè il materiale ufficiale nè le spiegazioni dei docenti. Potrebbero -
-                        inoltre - contenere errori o non essere aggiornati.
-                        <p>I documenti su questa istanza Erre2 sono pubblicati
-                            da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC BY-SA 4.0.</p>
-                    </Footer>
+                    <div className="Footer">
+                        <Footer> Gli appunti presenti su questo sito non sono pubblicati da un membro del corpo docente
+                            di {server.server.university},
+                            e non sostituiscono nè il materiale ufficiale nè le spiegazioni dei docenti. Potrebbero -
+                            inoltre - contenere errori o non essere aggiornati.
+                            <p>I documenti su questa istanza Erre2 sono pubblicati
+                                da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC BY-SA
+                                4.0.</p>
+                        </Footer>
+                    </div>
                 </div>
 
             ) : (

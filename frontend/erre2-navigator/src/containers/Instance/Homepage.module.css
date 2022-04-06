@@ -10,6 +10,11 @@
 .Home{
 }
 
+.Fermitech-Footer{
+    margin-right: 2rem;
+    margin-left: 2rem;
+}
+
 .PanelFix{
     min-width: auto;
 }
