@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import Style from "./Homepage.module.css";
-import {Anchor, Box, Button, Chapter, Heading, Panel} from "@steffo/bluelib-react";
+import {Anchor, Box, Button, Chapter, Footer, Heading, Panel} from "@steffo/bluelib-react";
 import {useAppContext} from "../../libs/Context";
 import {useHistory, useParams} from "react-router-dom";
 import SummaryPanel from "./SummaryPanel";
@@ -120,11 +120,7 @@ export default function Home() {
                         </Heading>
                         <p>{server.server.university}</p>
                         <Panel>
-                            <p>
                                 "{server.server.motd}"
-                            </p>
-                            I documenti su questa istanza Erre2 sono pubblicati
-                            da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC BY-SA 4.0.
                         </Panel>
                     </div>
                     <Panel>
@@ -139,8 +135,13 @@ export default function Home() {
                             <Box customColor={"#E0C097"} style={{minWidth: "unset"}}>Vuoi rimanere aggiornato sui documenti di questa istanza?<p><Anchor
                                 href={"https://t.me/"+channelLink}>Clicca qui per ricevere update su Telegram!</Anchor></p></Box>)}
                     </Panel>
-                    Gli appunti presenti su questo sito non sono pubblicati da un membro del corpo docente di {server.server.university},
-                    e non sostituiscono nè il materiale ufficiale nè le spiegazioni dei docenti. Potrebbero - inoltre - contenere errori o non essere aggiornati.
+                    <Footer> Gli appunti presenti su questo sito non sono pubblicati da un membro del corpo docente
+                        di {server.server.university},
+                        e non sostituiscono nè il materiale ufficiale nè le spiegazioni dei docenti. Potrebbero -
+                        inoltre - contenere errori o non essere aggiornati.
+                        <p>I documenti su questa istanza Erre2 sono pubblicati
+                            da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC BY-SA 4.0.</p>
+                    </Footer>
                 </div>
 
             ) : (
