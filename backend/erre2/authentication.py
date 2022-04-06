@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 from typing import Optional
-from os import environ
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
@@ -11,8 +10,8 @@ from pydantic import BaseModel
 from erre2.database import models
 from erre2.database.crud import get_user_by_email, get_server
 from erre2.database.db import SessionLocal
+from erre2.configuration import JWT_KEY
 
-SECRET_KEY = environ["JWT_KEY"]
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 120
 
@@ -51,7 +50,7 @@ def authenticate_user(email: str, password: str):
 def create_token(data: dict):
     encode = data.copy()
     encode.update({"exp": datetime.utcnow() + timedelta(ACCESS_TOKEN_EXPIRE_MINUTES)})
-    return jwt.encode(encode, SECRET_KEY, ALGORITHM)
+    return jwt.encode(encode, JWT_KEY, ALGORITHM)
 
 
 def get_current_user(token: str = Depends(oauth2_scheme)):
@@ -61,7 +60,7 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
         headers={"WWW-Authenticate": "Bearer"},
     )
     try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        payload = jwt.decode(token, JWT_KEY, algorithms=[ALGORITHM])
         email: str = payload.get("sub")
         if email is None:
             raise credentials_exception

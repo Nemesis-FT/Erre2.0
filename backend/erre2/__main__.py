@@ -11,6 +11,7 @@ from erre2.authentication import Token, authenticate_user, create_token, get_has
 from erre2.database import crud, schemas, models
 from erre2.database.db import engine, SessionLocal
 from erre2.routers import users, course, server, summary
+from erre2.configuration import ROOT_URL, setting_required
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -25,7 +26,7 @@ origins = [
     "https://navigator.erre2.fermitech.info",
 ]
 
-if os.getenv("DEBUG"):
+if __debug__:
     origins.append(
         "http://localhost:3000",
     )
@@ -42,7 +43,7 @@ app.mount("/files", StaticFiles(directory="Files"), name="files")
 
 @app.get("/")
 async def root():
-    return RedirectResponse("https://navigator.erre2.fermitech.info/erre2/{}/".format(os.getenv("ROOT_URL")))
+    return RedirectResponse("https://navigator.erre2.fermitech.info/erre2/{}/".format(ROOT_URL))
 
 
 @app.post("/token", response_model=Token)
@@ -56,10 +57,13 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends()):
 
 
 if __name__ == "__main__":
+    BIND_IP = setting_required("BIND_IP")
+    BIND_PORT = setting_required("BIND_PORT")
+
     with SessionLocal() as db:
         if not db.query(models.User).filter_by(uid=1).first():
             crud.create_user(db, schemas.UserCreate(email="admin@admin.com", hash=get_hash("password"), name="admin",
                                                     surname="admin"))
         if not db.query(models.Server).first():
             crud.create_server(db)
-    uvicorn.run(app, host="0.0.0.0", port=int(os.getenv("PORT")))
+    uvicorn.run(app, host=BIND_IP, port=int(BIND_PORT), debug=__debug__)

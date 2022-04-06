@@ -118,25 +118,36 @@ export default function Home() {
                             {!isFav ? (<FontAwesomeIcon
                                 icon={faStar} onClick={e => addFav()}/>) : (<div/>)}
                         </Heading>
-                        <p>{server.server.university}</p>
+                        <p className="text-muted">{server.server.university}</p>
                         <Panel>
-                            <p>
-                                "{server.server.motd}"
-                            </p>
-                            I riassunti su questa istanza sono pubblicati
-                            da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC BY-SA 4.0.
+                            <Button onClick={(e) => {
+                                setShowInfo(!showInfo)
+                            }}>Informazioni sul server</Button>
+                            {showInfo ? (
+                                <Panel>
+                                    <p>
+                                        "{server.server.motd}"
+                                    </p>
+                                    I documenti su questa istanza sono pubblicati
+                                    da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC
+                                    BY-SA
+                                    4.0.
+                                </Panel>
+                            ) : (
+                                <div></div>
+                            )}
                         </Panel>
                     </div>
                     <Panel>
                         <Chapter>
-                                <Button children={"Accedi"} onClick={e => history.push("/login")}/>
-                                <Button children={"Esci"} onClick={e => disconnect()}/>
+                                <Button children={"Accedi"} onClick={e => history.push("/login")}></Button>
+                                <Button children={"Esci"} onClick={e => disconnect()}></Button>
                         </Chapter>
                     </Panel>
                     <Panel>
                         <SummaryPanel/>
                         {channelLink!="null" &&(
-                            <Box customColor={"#E0C097"} style={{minWidth: "unset"}}>Vuoi rimanere aggiornato sui riassunti di questa istanza?<p><Anchor
+                            <Box customColor={"#E0C097"} style={{minWidth: "unset"}}>Vuoi rimanere aggiornato sui documenti di questa istanza?<p><Anchor
                                 href={"https://t.me/"+channelLink}>Clicca qui per ricevere update su Telegram!</Anchor></p></Box>)}
                     </Panel>
                 </div>

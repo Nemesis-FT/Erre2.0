@@ -1,17 +1,10 @@
-import os
-
 import requests
+
+from erre2.configuration import BOT_KEY, BOT_CHANNEL
 
 
 def telegram_send_message(message):
-    botkey = os.getenv("BOT_KEY")
-    botchannel = os.getenv("BOT_CHANNEL")
-    if not botkey or not botchannel:
-        return
     try:
-        ans = requests.post("https://api.telegram.org/bot{}/sendMessage?chat_id=@{}&text={}&parse_mode=html".format(
-            botkey, botchannel, message
-        ))
-        pass
+        requests.post(f"https://api.telegram.org/bot{BOT_KEY}/sendMessage?chat_id=@{BOT_CHANNEL}&text={message}&parse_mode=html")
     except Exception as e:
         pass
