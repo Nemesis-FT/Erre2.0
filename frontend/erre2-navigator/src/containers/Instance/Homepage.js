@@ -125,8 +125,6 @@ export default function Home() {
                             </p>
                             I documenti su questa istanza Erre2 sono pubblicati
                             da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC BY-SA 4.0.
-                            Gli appunti presenti su questo sito non sono pubblicati da un membro del corpo docente di {server.server.university},
-                            e non sostituiscono nè il materiale ufficiale nè le spiegazioni dei docenti. Potrebbero - inoltre - contenere errori o non essere aggiornati.
                         </Panel>
                     </div>
                     <Panel>
@@ -141,6 +139,8 @@ export default function Home() {
                             <Box customColor={"#E0C097"} style={{minWidth: "unset"}}>Vuoi rimanere aggiornato sui documenti di questa istanza?<p><Anchor
                                 href={"https://t.me/"+channelLink}>Clicca qui per ricevere update su Telegram!</Anchor></p></Box>)}
                     </Panel>
+                    Gli appunti presenti su questo sito non sono pubblicati da un membro del corpo docente di {server.server.university},
+                    e non sostituiscono nè il materiale ufficiale nè le spiegazioni dei docenti. Potrebbero - inoltre - contenere errori o non essere aggiornati.
                 </div>
 
             ) : (
