@@ -118,24 +118,15 @@ export default function Home() {
                             {!isFav ? (<FontAwesomeIcon
                                 icon={faStar} onClick={e => addFav()}/>) : (<div/>)}
                         </Heading>
-                        <p className="text-muted">{server.server.university}</p>
+                        <p>{server.server.university}</p>
                         <Panel>
-                            <Button onClick={(e) => {
-                                setShowInfo(!showInfo)
-                            }}>Informazioni sul server</Button>
-                            {showInfo ? (
-                                <Panel>
-                                    <p>
-                                        "{server.server.motd}"
-                                    </p>
-                                    I documenti su questa istanza sono pubblicati
-                                    da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC
-                                    BY-SA
-                                    4.0.
-                                </Panel>
-                            ) : (
-                                <div></div>
-                            )}
+                            <p>
+                                "{server.server.motd}"
+                            </p>
+                            I documenti su questa istanza Erre2 sono pubblicati
+                            da {server.server.owner.name} {server.server.owner.surname} sotto licenza CC BY-SA 4.0.
+                            Gli appunti presenti su questo sito non sono pubblicati da un membro del corpo docente di {server.server.university},
+                            e non sostituiscono nè il materiale ufficiale nè le spiegazioni dei docenti. Potrebbero - inoltre - contenere errori o non essere aggiornati.
                         </Panel>
                     </div>
                     <Panel>
