@@ -137,7 +137,7 @@ export default function Home() {
                                     href={"https://t.me/" + channelLink}>Clicca qui per ricevere update su
                                     Telegram!</Anchor></p></Box>)}
                     </Panel>
-                    <div className="Footer">
+                    <div className={Style.DisclamerFooter}>
                         <Footer> Gli appunti presenti su questo sito non sono pubblicati da un membro del corpo docente
                             di {server.server.university},
                             e non sostituiscono nè il materiale ufficiale nè le spiegazioni dei docenti. Potrebbero -
