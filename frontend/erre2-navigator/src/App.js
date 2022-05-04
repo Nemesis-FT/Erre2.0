@@ -1,27 +1,15 @@
 import Routes from "./Routes";
 import './App.css';
 import {AppContext} from "./libs/Context"
-import React, {useEffect, useState} from "react";
-import {useHistory} from "react-router-dom";
-import {Bluelib, Footer, LayoutThreeCol, useBluelibInBody} from "@steffo/bluelib-react";
+import React, {useState} from "react";
+import {Footer, LayoutThreeCol, useBluelibInBody} from "@steffo/bluelib-react";
 
 
 function App() {
     const [instanceIp, setInstanceIp] = useState("");
     const [connected, setConnected] = useState(false);
     const [token, setToken] = useState("")
-    let history = useHistory();
-
-    useEffect(() => onLoad(), [onLoad]);
-
-    function onLoad() {
-        if (localStorage.getItem("instanceIp") && history) {
-            setInstanceIp(localStorage.getItem("instanceIp"))
-            setConnected(true)
-            history.push("/erre2/" + instanceIp)
-        }
-    }
-
+    
     useBluelibInBody("amber");
 
     return <>
