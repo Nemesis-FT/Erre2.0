@@ -9,11 +9,20 @@ on:
 jobs:
   build:
     uses: Steffo99/.github/.github/workflows/build-poetry.yml@main
+    defaults:
+      run:
+        working-directory: ./backend
 
   github:
     uses: Steffo99/.github/.github/workflows/release-poetry-github.yml@main
+    defaults:
+      run:
+        working-directory: ./backend
     needs:
       - build
 
   ghcrio:
     uses: Steffo99/.github/.github/workflows/buildrelease-docker.yml@main
+    defaults:
+      run:
+        working-directory: ./backend
