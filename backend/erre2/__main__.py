@@ -23,7 +23,7 @@ app.include_router(server.router)
 app.include_router(summary.router)
 
 origins = [
-    "https://navigator.erre2.fermitech.info",
+    "https://navigator.erre2.fermitech.dev",
 ]
 
 if __debug__:
