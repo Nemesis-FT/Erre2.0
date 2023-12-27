@@ -23,7 +23,7 @@ app.include_router(server.router)
 app.include_router(summary.router)
 
 origins = [
-    "https://navigator.erre2.fermitech.info",
+    "https://navigator.erre2.fermitech.dev",
 ]
 
 if __debug__:
@@ -43,7 +43,7 @@ app.mount("/files", StaticFiles(directory="Files"), name="files")
 
 @app.get("/")
 async def root():
-    return RedirectResponse("https://navigator.erre2.fermitech.info/erre2/{}/".format(ROOT_URL))
+    return RedirectResponse("https://navigator.erre2.fermitech.dev/erre2/{}/".format(ROOT_URL))
 
 
 @app.post("/token", response_model=Token)
