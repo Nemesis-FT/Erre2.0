@@ -1,0 +1,19 @@
+name: "Release new version"
+
+on:
+  # Creation of a new tag starting with v
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    uses: Steffo99/.github/.github/workflows/build-poetry.yml@main
+
+  github:
+    uses: Steffo99/.github/.github/workflows/release-poetry-github.yml@main
+    needs:
+      - build
+
+  ghcrio:
+    uses: Steffo99/.github/.github/workflows/buildrelease-docker.yml@main
