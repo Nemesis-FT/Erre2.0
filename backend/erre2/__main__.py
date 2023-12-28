@@ -66,4 +66,4 @@ if __name__ == "__main__":
                                                     surname="admin"))
         if not db.query(models.Server).first():
             crud.create_server(db)
-    uvicorn.run(app, host=BIND_IP, port=int(BIND_PORT), debug=__debug__)
+    uvicorn.run(app, host=BIND_IP, port=int(BIND_PORT))
